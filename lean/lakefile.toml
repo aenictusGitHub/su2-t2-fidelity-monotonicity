@@ -1,5 +1,5 @@
 name = "su2_t2_fidelity"
-version = "1.0.0"
+version = "2.0.0"
 defaultTargets = ["Certificate"]
 
 [[require]]
@@ -9,4 +9,4 @@ rev = "f897ebcf72cd16f89ab4577d0c826cd14afaafc7"
 
 [[lean_lib]]
 name = "Certificate"
-roots = ["Certificate", "Determinant", "Multipliers", "Qutrit"]
+roots = ["Audit", "BroadDeterminant", "CartesianSpectral", "Certificate", "ChoiScalarBounds", "CoherentBounds", "DensitySpan", "Determinant", "DickeEmbedding", "DickeGenerators", "DickeSU2", "FullTheorem", "ManuscriptNotation", "Multipliers", "PhysicalAffine", "PhysicalCertificate", "PhysicalCovariance", "PhysicalEmbedding", "PhysicalMarginal", "PhysicalNBody", "PhysicalTransfer", "PhysicalTwoCovariance", "PhysicalTwoTrace", "Qutrit", "SU2Choi", "SU2Differential", "Spectral", "SpinCovariance", "SpinGenerators", "SpinHighestWeight", "SpinOneAction", "TraceDual"]

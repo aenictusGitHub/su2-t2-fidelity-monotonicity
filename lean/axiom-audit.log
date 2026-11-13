@@ -1,0 +1,30 @@
+'SU2T2.Dicke.embedding_isometry' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SU2T2.Dicke.covariant_of_covariantStates' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SU2T2.Dicke.covariant_generators' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SU2T2.Spin.covariant_channel_reduction' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SU2T2.Physical.twoMarginal_physical_constraints' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SU2T2.Physical.twoMarginal_action' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SU2T2.matrix_fidelity2_mono_of_purity_det' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SU2T2.conjecture1_fidelity_t2' depends on axioms: [propext, Classical.choice, Quot.sound]
+SU2T2.conjecture1_fidelity_t2 (N : ℕ) (hN : 3 ≤ N) (Φ : SU2T2.Spin.Mat N →ₗ[ℂ] SU2T2.Spin.Mat N)
+  (hCP : SU2T2.Choi.CompletelyPositive Φ) (hTP : ∀ (A : SU2T2.Spin.Mat N), Matrix.trace (Φ A) = Matrix.trace A)
+  (hSU2 : SU2T2.Dicke.CovariantStates N Φ) (ρ : SU2T2.Spin.Mat N) (hρ : Matrix.PosSemidef ρ)
+  (htr : Matrix.trace ρ = 1) : SU2T2.fidelityTotal2 N hN ρ ≤ SU2T2.fidelityTotal2 N hN (Φ ρ)
+def SU2T2.Choi.CompletelyPositive : {n : ℕ} → (SU2T2.Choi.Mat n →ₗ[ℂ] SU2T2.Choi.Mat n) → Prop :=
+fun {n} φ =>
+  ∀ (k : ℕ) (X : Matrix (Fin n × Fin k) (Fin n × Fin k) ℂ), X.PosSemidef → (SU2T2.Choi.amplification φ k X).PosSemidef
+def SU2T2.Dicke.CovariantStates : (n : ℕ) → (SU2T2.Spin.Mat n →ₗ[ℂ] SU2T2.Spin.Mat n) → Prop :=
+fun n φ =>
+  ∀ (U : ↥SU2T2.Dicke.SU2) (ρ : SU2T2.Spin.Mat n),
+    Matrix.PosSemidef ρ →
+      Matrix.trace ρ = 1 →
+        φ (SU2T2.Dicke.action n U * ρ * Matrix.conjTranspose (SU2T2.Dicke.action n U)) =
+          SU2T2.Dicke.action n U * φ ρ * Matrix.conjTranspose (SU2T2.Dicke.action n U)
+def SU2T2.Dicke.action : (n : ℕ) → ↥SU2T2.Dicke.SU2 → SU2T2.Spin.Mat n :=
+fun n U => (SU2T2.Dicke.embedding n).conjTranspose * SU2T2.Dicke.tensorPower (↑U) n * SU2T2.Dicke.embedding n
+def SU2T2.marginal2 : (N : ℕ) → 3 ≤ N → SU2T2.Spin.Mat N → SU2T2.Cartesian.ComplexThree :=
+fun N hN ρ => SU2T2.Physical.twoMarginal (N - 3) (Matrix.submatrix ρ (Fin.cast ⋯) (Fin.cast ⋯))
+def SU2T2.fidelityTotal2 : (N : ℕ) → 3 ≤ N → SU2T2.Spin.Mat N → ℝ :=
+fun N hN ρ => SU2T2.matrixFidelity2 (SU2T2.marginal2 N hN ρ)
+def SU2T2.matrixFidelity2 : SU2T2.QutritMatrix → ℝ :=
+fun A => ((Matrix.trace (CFC.sqrt A)).re ^ 2 - 1) / 2

@@ -61,121 +61,125 @@ at $t=2$. No restriction to pure inputs or to random rotations is made.
 The theorem does not address the trace-distance candidate.
 
 \section{The two channel multipliers}
-Use the Hilbert--Schmidt orthonormal irreducible tensor operators
-$T_{LM}$ of the manuscript. The conjugation representation on
-$\mathcal B(\mathcal H_j)$ contains one copy of each rank $L=0,\ldots,N$.
-Schur's lemma and Hermiticity preservation therefore give real numbers
-$f_L$ such that
+Use the Hilbert--Schmidt orthonormal tensor operators $T_{LM}$ of the
+manuscript and put
 \[
- \Phi(T_{LM})=f_LT_{LM}.
+ f=f_1,\qquad g=f_2,\qquad S=N(N+2),\qquad c=j(j+1)=S/4.
 \]
-Covariance implies that $\Phi(\id)$ is a scalar multiple of $\id$;
-trace preservation fixes that scalar to one. In particular $f_0=1$.
-Write
+We give an elementary justification that these two real multipliers exist;
+no decomposition of the Choi representation is needed.
+Let $H=J_z$, $E=J_x+iJ_y$, $E^\dagger=J_x-iJ_y$. In the usual
+weight basis $\ket{k}$, $0\le k\le N$,
 \[
- f=f_1,\qquad g=f_2,\qquad S=N(N+2),\qquad D=S(S-3)>0.
+ H\ket{k}=(k-j)\ket{k},\qquad
+ E\ket{k}=\sqrt{(k+1)(N-k)}\ket{k+1}.
 \]
-The symbol $S$ here is a scalar, distinct from the subscript in $\rho_S$.
+State covariance extends to all operators by complex linearity: positive
+operators are nonnegative multiples of states, and every matrix is a
+complex linear combination of positive operators. Differentiating
+rotation covariance shows that $\Phi$ commutes with
+$[J_a,\cdot]$, hence with $[H,\cdot]$, $[E,\cdot]$, and
+$[E^\dagger,\cdot]$.
+If $[H,X]=LX$ and $[E,X]=0$, then $X\ket{0}$ is a multiple of
+$\ket{L}$. Moreover $X E^k\ket{0}=E^kX\ket{0}$ determines $X$
+on the entire basis. Thus $X$ is a multiple of $E^L$ for
+$L=0,1,2$. Applying this to $X=\Phi(E^L)$ shows that $\Phi$
+is scalar on each space generated from $E^L$ by repeated commutators
+with $E^\dagger$. For $L=0$ this is the scalar space; for $L=1$
+it is the span of $J_a$; for $L=2$ it is the span of
+\[
+ Q_{ab}=\frac{J_aJ_b+J_bJ_a}{2}-\frac c3\delta_{ab}\id.
+\]
+For example,
+\[
+ [E^\dagger,E]=-2H,\quad
+ [E^\dagger,E^2]=-2(HE+EH),\quad
+ [E^\dagger,[E^\dagger,E^2]]=12H^2-4c\id;
+\]
+these identities, their adjoints, and $\sum_aQ_{aa}=0$ give all the
+listed components.
+Hermiticity preservation makes the scalars real, and trace preservation
+makes the rank-zero scalar one. Hence
+\[
+ \Phi(\id)=\id,\qquad \Phi(J_a)=fJ_a,\qquad \Phi(Q_{ab})=gQ_{ab}.
+\]
+The trace adjoint also commutes with these commutators and preserves
+Hermiticity. The same argument applies to it, and trace pairing with
+any nonzero Hermitian component shows that its rank-one and rank-two
+scalars are the same $f,g$. This also justifies the transformation of
+expectation values used below.
 
 \begin{lemma}[Multiplier bounds]\label{lem:multipliers}
 Every channel in Theorem~\ref{thm:main} satisfies
 \begin{align}
- -\frac35\le g\le1,\qquad 3|f|\le2+g,\label{eq:region}\\
+ -\frac23\le g\le1,\qquad 3|f|\le2+g,\label{eq:region}\\
  3Sf^2-6f-S\le2(S-3)g.\label{eq:curved}
 \end{align}
 Consequently $|f|\le1$ and $|g|\le1$; if $g<-1/2$, then $|f|<1/3$.
 \end{lemma}
 
 \begin{proof}
-We first derive formulas that include all covariant channels. Set
-$d=N+1$ and $c=j(j+1)=S/4$. Let $C_\Phi$ be the unnormalized Choi
+Set $d=N+1$ and let $C_\Phi\succeq0$ be the unnormalized Choi
 matrix, with convention
 \begin{equation}\label{eq:choi-trace}
  \Tr[C_\Phi(B\otimes C^{\mathsf T})]=\Tr[B\Phi(C)].
 \end{equation}
-The unitary $V\ket{j,m}=(-1)^{j-m}\ket{j,-m}$ obeys
-$VJ_a^{\mathsf T}V^\dagger=-J_a$. Consequently
-$\widetilde C_\Phi=(\id\otimes V)C_\Phi(\id\otimes V^\dagger)$
-commutes with $U\otimes U$. In $\mathcal H_j\otimes\mathcal H_j$,
-weight $m\in\{-N,\ldots,N\}$ has multiplicity $N+1-|m|$.
-Subtracting consecutive nonnegative-weight multiplicities gives one
-copy of each spin $K=0,\ldots,N$. Thus the decomposition
-$\mathcal H_j\otimes\mathcal H_j=\bigoplus_{K=0}^N\mathcal H_K$
-is multiplicity free. Positivity of the Choi matrix and
-$\Tr C_\Phi=d$ imply
-\begin{equation}\label{eq:choi}
- \widetilde C_\Phi=d\sum_{K=0}^N p_K\frac{P_K}{2K+1},\qquad
- p_K\ge0,\qquad\sum_{K=0}^N p_K=1,
-\end{equation}
-where $P_K$ projects onto total spin $K$. We use $\E$ for this finite
-weighted average and put $\chi_K=K(K+1)$.
-
-For completeness the required Choi moments can be computed using only
-angular-momentum commutators. Define
+Complete positivity gives $C_\Phi\succeq0$ by applying
+$\Phi\otimes\mathrm{id}$ to the unnormalized maximally entangled
+projector. Trace preservation gives $\Tr C_\Phi=d$.
+Thus $\omega=C_\Phi/d$ is a density matrix.
+Define the Hermitian observable
 \[
- X=\sum_{a=1}^3J_a\otimes J_a,\qquad
- Q_{ab}=\frac{J_aJ_b+J_bJ_a}{2}-\frac c3\delta_{ab}\id.
+ X=-\sum_{a=1}^3J_a\otimes J_a^{\mathsf T}.
 \]
-The total-spin Casimir gives $X P_K=(\chi_K/2-c)P_K$. The $J_a$
-span rank one, whereas the symmetric traceless $Q_{ab}$ span rank two.
-Moreover
+Only the following two polynomial identities are required:
 \begin{equation}\label{eq:quadrupole}
- \sum_{a,b}Q_{ab}\otimes Q_{ab}
+ \sum_{a,b}Q_{ab}\otimes Q_{ab}^{\mathsf T}
  =X^2+\frac X2-\frac{c^2}3\id,
  \qquad
  \sum_{a,b}Q_{ab}^2=\frac{c(4c-3)}6\id.
 \end{equation}
-Here the first identity follows by expanding the symmetrized products
-and using $[J_a,J_b]=i\sum_k\epsilon_{abk}J_k$. For the second,
-expansion of $\sum_b[J_b,[J_b,J_a]]=2J_a$ gives
-$\sum_bJ_bJ_aJ_b=(c-1)J_a$. Thus, writing
+For the first identity, put $B_{ab}=(J_aJ_b+J_bJ_a)/2$ and expand:
+\[
+ \sum_{a,b}B_{ab}\otimes B_{ab}^{\mathsf T}
+ =X^2+\frac12\sum_{a,b}J_aJ_b\otimes[J_a,J_b]^{\mathsf T}
+ =X^2+\frac X2.
+\]
+The last equality uses $\sum_{a,b}\epsilon_{abk}J_aJ_b=iJ_k$;
+subtracting the scalar trace parts gives the first identity.
+For the second, expansion of
+$\sum_b[J_b,[J_b,J_a]]=2J_a$ gives
+$\sum_bJ_bJ_aJ_b=(c-1)J_a$. Thus, for
 $B_{ab}=(J_aJ_b+J_bJ_a)/2$,
 \[
  \sum_{a,b}B_{ab}^2
  =\frac12\sum_{a,b}(J_aJ_bJ_aJ_b+J_aJ_bJ_bJ_a)
  =\left(c^2-\frac c2\right)\id,
 \]
-which proves the second identity in \eqref{eq:quadrupole}.
+which proves the second identity.
+The trace pairing and the two multipliers now give
+\[
+ \Tr(\omega X)=-cf,\qquad
+ \Tr(\omega X^2)=\frac{c(4c-3)}6g+\frac{cf}{2}+\frac{c^2}{3}.
+\]
+Nonnegative variance,
+$\Tr(\omega X^2)\ge[\Tr(\omega X)]^2$, is precisely
+\eqref{eq:curved} after multiplication by $12/c$.
 
-Time reversal changes the sign of $J_a^{\mathsf T}$ and fixes
-$Q_{ab}^{\mathsf T}$. Applying \eqref{eq:choi-trace} therefore yields
+The affine marginal law \eqref{eq:transform}, established in the next
+section, applied to a spin-coherent input gives reduced output
+eigenvalues
 \[
- -dcf=\Tr(\widetilde C_\Phi X)=d\E(\chi/2-c),
+ \frac{2+g+3f}{6},\qquad \frac{2+g-3f}{6},\qquad\frac{1-g}{3}.
 \]
-and
+Their nonnegativity gives $g\le1$ and $3|f|\le2+g$.
+Finally, if $g<-2/3$, \eqref{eq:curved} and $S\ge15$ would give
 \[
- \frac{dc(4c-3)}6g
- =d\E\left[(\chi/2-c)^2+\frac{\chi/2-c}{2}-\frac{c^2}3\right].
+ 0>9(Sf-1)^2+S^2-12S-9
+   =9(Sf-1)^2+(S-15)(S+3)+36\ge0.
 \]
-Equivalently,
-\begin{equation}\label{eq:fg}
- f=\E f_K,\quad g=\E g_K,\qquad
- f_K=1-\frac{2\chi_K}{S},\quad
- g_K=1+\frac{6\chi_K(\chi_K-S+1)}D.
-\end{equation}
-Since $0\le\chi_K\le N(N+1)<S-1$, we have $g_K\le1$.
-For $N=3$, the four values of $g_K$ are $1,1/5,-3/5,1/5$.
-For $N\ge4$, $S\ge24$, completing the square gives
-\[
- g_K\ge1-\frac{3(S-1)^2}{2S(S-3)}\ge-\frac35,
-\]
-where the last inequality follows from
-\[
- 16S(S-3)-15(S-1)^2=(S-24)(S+6)+129>0.
-\]
-The two linear bounds follow on averaging the identities
-\[
- 2+g_K-3f_K=\frac{6\chi_K(\chi_K-2)}D\ge0,
- \qquad
- 2+g_K+3f_K=\frac{6[(\chi_K-S+2)^2+S-4]}D>0.
-\]
-The first inequality uses the discrete fact that $\chi_K=0$ or
-$\chi_K\ge2$. Finally, direct substitution into \eqref{eq:fg} gives
-\begin{equation}\label{eq:variance}
- 2(S-3)g-(3Sf^2-6f-S)
- =\frac{12}{S}\E[(\chi-\E\chi)^2]\ge0.
-\end{equation}
-If $g<-1/2$, \eqref{eq:curved} implies $Sf^2-2f-1<0$.
+This proves \eqref{eq:region}. If $g<-1/2$,
+\eqref{eq:curved} implies $Sf^2-2f-1<0$.
 Since $S\ge15$, this forces $-1/3<f<1/3$: otherwise
 $Sf^2-2f-1\ge15f^2-2f-1=(3f-1)(5f+1)\ge0$.
 \end{proof}
@@ -215,15 +219,17 @@ symmetry gives
  \left\langle\frac{J_aJ_b+J_bJ_a}{2}\right\rangle
  =\frac N4\delta_{ab}+\frac{N(N-1)}4T_{ab}.
 \]
-The nonnegative variance of every real linear combination of the $J_a$
-implies $\id+(N-1)T-N\mathbf r\mathbf r^{\mathsf T}\succeq0$.
-Testing \eqref{eq:cartesian} on real vectors gives $A\succeq0$.
-Consequently,
+The state has a symmetric three-qubit reduction with the same two-qubit
+marginal. Applying these identities to that three-qubit state and using
+nonnegative variance of its collective spin gives
+$\id+2T-3\mathbf r\mathbf r^{\mathsf T}\succeq0$.
+Hence $\id+2T\succeq0$. Testing \eqref{eq:cartesian} on real
+vectors also gives $A\succeq0$. Therefore
 \begin{equation}\label{eq:A-bounds}
- 0\preceq A\preceq\frac{N}{N-1}\id_3\preceq\frac32\id_3,
- \qquad\Tr A=2.
+ 0\preceq A\preceq\frac32\id_3,\qquad\Tr A=2.
 \end{equation}
-Only the uniform bound $A\preceq3\id_3/2$ is needed below.
+This uses only the symmetric three-qubit extension, available for every
+$N\ge3$.
 
 Write $\rho'=\Phi(\rho)$. The partial trace intertwines rotations,
 so the rank-one and rank-two parts of the reduction acquire the same
@@ -257,7 +263,8 @@ Since $g\le1$, \eqref{eq:volume-expansion} now gives
  \det A'-\det A\ge
  \frac{(1-g)s_2}{36}(7+7g-5g^2)\ge0,
 \]
-because $7+7g-5g^2=1+(5g+3)(2-g)\ge1$ on $[-3/5,1]$.
+because
+$7+7g-5g^2=1/9+(g+2/3)(31/3-5g)\ge1/9$ on $[-2/3,1]$.
 \end{proof}
 
 \begin{lemma}[Cofactor comparison]\label{lem:cofactor}
@@ -272,7 +279,7 @@ We have $0\le b,c\le3/2$ and $b+c\le2$. Also
 $\alpha+gx\ge0$ for $0\le x\le3/2$: for $g\ge0$ this is
 immediate, and for $g<0$ it follows from
 \begin{equation}\label{eq:positive}
- \alpha+gx\ge\alpha+\frac32g=\frac{4+5g}{6}\ge\frac16.
+ \alpha+gx\ge\alpha+\frac32g=\frac{4+5g}{6}\ge\frac19.
 \end{equation}
 Write $s=b+c$, $p=bc$.
 
@@ -285,7 +292,7 @@ The identity
 \]
 and $(g+\alpha)^2=(2+g)^2/9\ge f^2$ prove the claim.
 
-If $-3/5\le g<-1/2$, Lemma~\ref{lem:multipliers} gives $f^2<1/9$.
+If $-2/3\le g<-1/2$, Lemma~\ref{lem:multipliers} gives $f^2<1/9$.
 Set $h=g^2-1/9>0$. The inequality
 $(3/2-b)(3/2-c)\ge0$ gives $p\ge3s/2-9/4$.
 Furthermore
@@ -299,10 +306,10 @@ It follows that
  &\ge\alpha^2-\frac94h+
        \left(\alpha g+\frac32h\right)s\\
  &\ge\alpha^2+2\alpha g+\frac34h
-   =\frac{13+16g-5g^2}{36}\ge\frac{2}{45}>0.
+   =\frac{13+16g-5g^2}{36}\ge\frac{1}{324}>0.
 \end{align*}
 The last bound follows from
-$13+16g-5g^2=8/5+(g+3/5)(19-5g)$.
+$13+16g-5g^2=1/9+(g+2/3)(58/3-5g)$.
 This proves \eqref{eq:cofactor} in both cases.
 \end{proof}
 
@@ -387,20 +394,30 @@ This proves precisely the fidelity part of Conjecture~1 at $t=2$.
 \qed
 
 \section{Formal verification and reproducibility}
-The accompanying Lean~4.24.0 files certify the complete scalar algebraic
-reduction of the argument, including every $N\ge3$, arbitrary probability
-mixtures, and singular inputs. The main theorem is
-\texttt{SU2T2.channel\_fidelity\_monotone\_from\_scalar\_reduction}.
-Its explicit hypotheses encode the multiplier formulas, the marginal
-constraints, and the spectral purity and determinant identities.
-The files contain no unfinished proofs or additional axioms. Their exact
-scope, dependency pins, checked-source hashes, and build instructions
-are recorded in \texttt{lean/README.md}.
+The accompanying Lean~4.24.0 development proves
+Theorem~\ref{thm:main} from its stated physical hypotheses. The public
+result is \texttt{SU2T2.conjecture1\_fidelity\_t2} in
+\texttt{lean/FullTheorem.lean}. Its only assumptions are $N\ge3$,
+complete positivity and trace preservation of a complex-linear map,
+rotation covariance on states, and positivity and unit trace of the input.
 
-This is not an end-to-end Lean formalization of Theorem~\ref{thm:main}:
-the Choi/Casimir reduction, the physical marginal constraints, and the
-identification with spectral data are proved above but are not themselves
-formalized in Lean. This distinction is part of the certificate's scope.
+The definitions use the normalized Dicke embedding into the actual
+$N$-qubit tensor product, matrices in $\mathrm{SU}(2)$, genuine partial
+traces, and the positive matrix square root from continuous functional
+calculus. The formal proof derives the infinitesimal covariance relations,
+the Choi variance bound, the physical marginal constraints and affine
+law, and the spectral identification. None of these steps remains an
+additional hypothesis. In particular, the proof requires neither a
+Clebsch--Gordan decomposition nor an assumed scalar reduction.
+
+The complete theorem and all its bridges depend only on the standard
+Lean/mathlib foundational axioms \texttt{propext},
+\texttt{Classical.choice}, and \texttt{Quot.sound}. There are no
+unfinished proofs or additional axioms. Dependency pins, build commands,
+the axiom audit, and checked-source hashes are supplied in
+\texttt{lean/README.md}, \texttt{lean/verification.log},
+\texttt{lean/axiom-audit.log}, and \texttt{lean/source-sha256.txt}.
+The original scalar certificate remains available as a subsidiary result.
 
 \begin{remark}[Why the marginal constraint matters]
 The bound $A\preceq3\id_3/2$ comes from the symmetric extension to

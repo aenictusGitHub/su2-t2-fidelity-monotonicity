@@ -1,89 +1,90 @@
-# Lean certificate: the scalar proof for fidelity at t = 2
+# Lean certificate of the full fidelity theorem at t = 2
 
-This project checks the real-algebra part of the companion proof of Conjecture 1
-for the fidelity total candidate at `t = 2`, including every `N ≥ 3` and every
-finite probability mixture of the covariant-channel vertices.
+Version 2.0.0 proves the full fidelity case of manuscript Conjecture 1 at proper
+order `t = 2`, for every natural `N ≥ 3`. The principal theorem is
+[`SU2T2.conjecture1_fidelity_t2`](FullTheorem.lean).
 
-**Scope:** this is a certificate of the complete scalar reduction. It is not an
-end-to-end formalization of the original statement in terms of Hilbert spaces,
-SU(2) representations, completely positive maps, and partial traces. The
-companion mathematical proof establishes that physical data satisfy the explicit
-hypotheses of the final Lean theorem. These hypotheses are visible in the theorem
-statement; they are not introduced as axioms.
+```lean
+theorem conjecture1_fidelity_t2 (N : ℕ) (hN : 3 ≤ N)
+    (Φ : Spin.Mat N →ₗ[ℂ] Spin.Mat N)
+    (hCP : Choi.CompletelyPositive Φ)
+    (hTP : ∀ A, (Φ A).trace = A.trace)
+    (hSU2 : Dicke.CovariantStates N Φ)
+    (ρ : Spin.Mat N) (hρ : ρ.PosSemidef) (htr : ρ.trace = 1) :
+    fidelityTotal2 N hN ρ ≤ fidelityTotal2 N hN (Φ ρ)
+```
 
-## What is checked
+These are exactly the physical hypotheses. The theorem has no assumed channel
+multipliers, Choi decomposition, marginal bounds, moment identities, eigenvalue
+identifications, or scalar fidelity reduction.
 
-| File | Results |
+## Definitions and correspondence with the manuscript
+
+- `Spin.Mat N` is the algebra of complex `(N+1) × (N+1)` matrices in the normalized
+  Dicke basis, with magnetic quantum number `m = k - N/2`.
+- `Choi.CompletelyPositive` means positivity under every finite ancillary matrix
+  amplification. It is not an assumed Kraus or Choi decomposition.
+- `Dicke.CovariantStates` quantifies over actual
+  `Matrix.specialUnitaryGroup (Fin 2) ℂ` elements and every density matrix. The
+  spin action is `Dᴴ * tensorPower U N * D`, where `D` is the proved isometric
+  normalized Dicke embedding. `DensitySpan` proves extension to all operators.
+- `marginal2 N hN ρ` is the actual two-qubit partial trace of the symmetric
+  embedding, compressed to the orthonormal Cartesian triplet basis. The dimension
+  transport in its definition merely writes `N = (N-3)+3`.
+- `fidelityTotal2` is `((Re Tr (CFC.sqrt ρ₂))² - 1)/2`. For positive matrices the
+  square-root trace is real, as proved through its eigenvalues. This is exactly
+  the manuscript's `𝒜₂^{T,F}`, using squared Uhlmann–Jozsa fidelity.
+
+## What is proved
+
+| Files | Checked mathematical content |
 | --- | --- |
-| `Multipliers.lean` | Exact vertex multiplier formulas; the bounds for every natural `N ≥ 3` and `0 ≤ K ≤ N`; the weighted-square inequality; all multiplier restrictions for arbitrary probability mixtures. |
-| `Determinant.lean` | Schur's cubic inequality; the deviation bound; unpolarized determinant expansion; both cofactor cases; determinant monotonicity, including singular inputs. |
-| `Qutrit.lean` | The elementary qutrit spectral argument from determinant increase and purity decrease to increase of the normalized fidelity candidate. |
-| `Certificate.lean` | Purity contraction and the final composition of all the preceding results. |
+| `DickeEmbedding`, `DickeGenerators`, `DickeSU2`, `DensitySpan` | Normalized symmetric embedding, concrete spin generators, genuine SU(2) rotations, differentiation of covariance, and extension from states to operators. |
+| `SpinHighestWeight`, `SpinGenerators`, `SpinCovariance`, `TraceDual` | Elementary highest-weight uniqueness, spin commutators and Casimir, unitality, real first/second-rank multipliers, and the same action for the actual trace adjoint. |
+| `SU2Choi` | Complete positivity implies Choi positivity; exact trace pairing; the two Casimir polynomial identities; Choi variance implies the curved multiplier bound. |
+| `PhysicalMarginal`, `PhysicalEmbedding`, `PhysicalNBody` | The actual symmetric partial trace is positive and trace preserving; its Cartesian matrix obeys `0 ≤ A ≤ 3I/2`, `Tr A = 2`, for every `N ≥ 3`. |
+| `PhysicalCovariance`, `PhysicalTransfer`, `PhysicalTwoCovariance`, `PhysicalTwoTrace`, `SpinOneAction`, `PhysicalAffine` | Covariance of the physical marginal, highest-weight transfer, complete spin-one basis identification, and the actual affine marginal law. |
+| `CoherentBounds`, `ChoiScalarBounds` | The coherent-state marginal and its output positivity give the linear multiplier bounds; Choi variance supplies `g ≥ -2/3`. |
+| `BroadDeterminant`, `Qutrit`, `Certificate` | Determinant increase, purity contraction, and the elementary square-root eigenvalue comparison, including singular states. |
+| `Spectral`, `CartesianSpectral` | Real orthogonal diagonalization, determinant and purity formulas, spectral identification of `CFC.sqrt`, and the actual matrix fidelity inequality. |
+| `PhysicalCertificate`, `ManuscriptNotation`, `FullTheorem` | Composition of all proved bridges into the exact manuscript theorem. |
+| `Audit` | Public statement, physical definitions, and axiom dependencies of the theorem and its main bridges. |
 
-The principal theorem is
+`Determinant`, `Multipliers`, and the original theorem in `Certificate` retain the
+version 1 scalar certificate. `SU2Differential` additionally proves the generic
+exponential covariance differentiation lemma. The full theorem uses the direct
+SU(2) rotation curves in `DickeSU2`.
 
-```lean
-SU2T2.channel_fidelity_monotone_from_scalar_reduction
-```
-
-Its conclusion is
-
-```lean
-((x+y+z)^2-1)/2 ≤ ((X+Y+Z)^2-1)/2
-```
-
-where `x,y,z` and `X,Y,Z` are the nonnegative square roots of the input and
-output marginal eigenvalues. This is exactly the `t = 2` normalization of
-`𝒜₂^{T,F}` in the manuscript.
-
-The scalar hypotheses of this theorem are:
-
-- `N ≥ 3` and nonnegative channel weights summing to one;
-- the stated rank-one and rank-two multiplier formulas, averaged with those weights;
-- eigenvalues `a,b,c` of the real symmetric matrix `A`, lying in `[0,3/2]` and
-  summing to two;
-- the affine action `A′ = 2(1-g)I/3 + gA` and `r′ = fr`, encoded in the output
-  purity and determinant formulas;
-- nonnegative normalized eigenvalue square roots and their exact purity and
-  determinant identities.
-
-The following parts are proved in the companion mathematical document and are
-**not formalized** here:
-
-1. The Choi decomposition and Casimir calculation reducing an SU(2)-covariant
-   channel to the displayed probability weights and multiplier formulas.
-2. The Cartesian form of the symmetric marginal and the finite-`N`
-   representability bound `0 ≤ A ≤ N/(N-1) I ≤ 3/2 I`.
-3. The finite-dimensional spectral theorem identifying the scalar purity and
-   determinant expressions with the marginal's eigenvalues.
+The full proof needs only the first two tensor ranks. A direct Choi variance
+argument replaces a Clebsch–Gordan decomposition and channel-vertex enumeration.
+The slightly broader lower bound `g ≥ -2/3` is sufficient for the determinant
+argument. The corresponding written proof is `../proof.pdf`.
 
 ## Reproduce the check
 
-The project pins Lean **4.24.0** and mathlib commit
-`f897ebcf72cd16f89ab4577d0c826cd14afaafc7` (the mathlib `v4.24.0` release).
-The complete transitive dependency lock is `lake-manifest.json`.
-
-With Lean's `elan` toolchain manager installed, run in this directory:
+The project pins Lean **4.24.0**, mathlib commit
+`f897ebcf72cd16f89ab4577d0c826cd14afaafc7`, and the transitive dependencies in
+`lake-manifest.json`. With Lean's `elan` manager installed, run here:
 
 ```sh
 lake update
-lake exe cache get Mathlib/Tactic.lean
+lake exe cache get
 lake build
-lake env lean Certificate.lean
+lake env lean Audit.lean
 ```
 
-The cache command retrieves compiled dependencies; it does not replace checking
-this project's proof terms. `lake build` checks the four source modules.
+The cache retrieves compiled mathlib dependencies. `lake build` checks all 32
+project modules from their source; it does not substitute a downloaded proof of
+this theorem. The recorded `verification.log` was produced after removing the
+project's local build artifacts. `axiom-audit.log` records a separate execution
+of the audit.
 
-`Certificate.lean` prints the axiom dependencies of the main theorems. The
-verification recorded in `verification.log` reports only Lean/mathlib's standard
-foundational axioms:
+The complete theorem and every audited physical bridge depend only on:
 
 ```text
 propext, Classical.choice, Quot.sound
 ```
 
 There are no `sorry`, `admit`, custom `axiom`, or `native_decide` declarations in
-the project sources. In particular, there is no `sorryAx` dependency.
-
-`source-sha256.txt` records the exact checked source and configuration files.
+the project sources, and no `sorryAx` dependency. `source-sha256.txt` records the
+exact source and configuration files checked in this release.

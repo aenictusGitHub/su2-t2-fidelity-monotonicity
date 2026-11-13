@@ -25,8 +25,8 @@ fidelity at orders `t ≥ 3`.
 - [BibTeX citation](citation.bib)
 - [Companion manuscript changes](manuscript.patch)
 
-The proof derives the relevant channel multipliers from the Choi matrix and
-angular-momentum Casimirs, obtains the physical marginal constraint
+The proof derives the relevant channel multipliers from covariance and the Choi
+variance, obtains the physical marginal constraint
 `0 ≤ A ≤ 3I/2`, and proves determinant increase and purity decrease. An elementary
 three-eigenvalue lemma then gives the exact fidelity normalization above.
 
@@ -37,24 +37,26 @@ replaces the square-root integral by an elementary algebraic comparison.
 
 ## What Lean certifies
 
-**The written mathematical proof is complete. The Lean certificate verifies its
-scalar algebraic reduction; it is not an end-to-end formalization of the SU(2)
-quantum-channel theorem.**
+**Version 2.0.0 proves the full quantum-channel theorem in Lean.** The principal
+theorem is `SU2T2.conjecture1_fidelity_t2` in [FullTheorem.lean](lean/FullTheorem.lean).
+Its hypotheses are precisely `N ≥ 3`, complete positivity, trace preservation,
+SU(2) covariance on density matrices, and a positive trace-one input.
 
-The principal checked theorem is
-`SU2T2.channel_fidelity_monotone_from_scalar_reduction`.
-It combines the multiplier bounds for every `N ≥ 3` and every probability mixture,
-the determinant and purity inequalities, and the final fidelity comparison.
+The certificate derives the SU(2) generator reduction, Choi positivity and
+variance, physical marginal constraints, the two-multiplier action on the actual
+partial trace, and the spectral identities for the actual positive matrix square
+root. None of these is an additional assumption of the final theorem.
 
-The Choi/Casimir representation of physical channels, the Cartesian form and
-symmetric-extension constraint of the marginal, and its spectral identities are
-derived in the PDF. These identifications remain explicit hypotheses of the Lean
-theorem. The files introduce no additional axioms or unfinished proofs.
+The shorter argument uses only the first two tensor ranks and a Choi variance
+bound. It does not require a Clebsch–Gordan decomposition. The original scalar
+certificate is retained as a subsidiary result; version 1.0.0 remains available.
 
 Lean **4.24.0** and mathlib commit
-`f897ebcf72cd16f89ab4577d0c826cd14afaafc7` are pinned. The build and axiom audit are
-recorded in [verification.log](lean/verification.log); the exact checked files are
-listed in [source-sha256.txt](lean/source-sha256.txt).
+`f897ebcf72cd16f89ab4577d0c826cd14afaafc7` are pinned. The clean build is recorded in
+[verification.log](lean/verification.log), and the theorem and bridge assumptions
+are printed in [axiom-audit.log](lean/axiom-audit.log). Only the standard axioms
+`propext`, `Classical.choice`, and `Quot.sound` occur. There are no unfinished
+proofs, additional axioms, or `sorryAx` dependencies.
 
 ## Reproduce
 
@@ -63,9 +65,9 @@ With Lean's `elan` manager installed:
 ```sh
 cd lean
 lake update
-lake exe cache get Mathlib/Tactic.lean
+lake exe cache get
 lake build
-lake env lean Certificate.lean
+lake env lean Audit.lean
 ```
 
 The final command prints the standard foundational dependencies
@@ -92,7 +94,7 @@ The full manuscript and original supplied PDF are not redistributed here.
 The manuscript retains the wording and numbering of Conjecture 1 and identifies
 its fidelity `t = 2` case as proved. Its remaining-open statements are narrowed
 accordingly. The bibliography describes the Lean component as a certificate of
-the algebraic reduction.
+the full theorem.
 
 This repository is initially **private**, as requested. Its citation is therefore
 a draft reference until the repository is made accessible to readers. No change

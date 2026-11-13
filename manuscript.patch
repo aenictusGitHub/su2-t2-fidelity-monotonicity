@@ -47,7 +47,7 @@
 + =\frac{\bigl(\Tr\sqrt{(\Phi(\rho))_2}\bigr)^2-1}{2}
 + \ge \A_2^{T,F}(\rho).
 +\]
-+A self-contained proof, together with a Lean certificate of its algebraic reduction, is provided in Ref.~\cite{SU2T2FidelityProof}. The trace-distance case at $2\le t<N$ and the fidelity case at $3\le t<N$ remain open. Numerical tests described in Appendix~\ref{app:numerics} support these remaining cases; they do not establish them.
++A self-contained proof, together with a Lean certificate of the full theorem, is provided in Ref.~\cite{SU2T2FidelityProof}. The trace-distance case at $2\le t<N$ and the fidelity case at $3\le t<N$ remain open. Numerical tests described in Appendix~\ref{app:numerics} support these remaining cases; they do not establish them.
  \end{revision}
  
  We conclude this section with a general result, which will prove useful later on the relation between the Uhlmann fidelity and entanglement. Consider a quantum state $|\psi\rangle$ defined on a composite Hilbert space $\mathcal{H}_{AB}$. Then, a measure of entanglement of the state $|\psi\rangle$ on the bipartition $A|B$ is given by the entanglement negativity~\cite{2002Vidal}
@@ -143,6 +143,6 @@
 +  title = {Fidelity total anticoherence is nondecreasing under covariant noise at order two},
 +  year = {2026},
 +  howpublished = {GitHub repository},
-+  url = {https://github.com/aenictusGitHub/su2-t2-fidelity-monotonicity/tree/v1.0.0},
-+  note = {Version 1.0.0; self-contained proof and Lean certificate of the algebraic reduction; private draft}
++  url = {https://github.com/aenictusGitHub/su2-t2-fidelity-monotonicity/tree/v2.0.0},
++  note = {Version 2.0.0; self-contained proof and Lean certificate of the full theorem; private draft}
 +}
