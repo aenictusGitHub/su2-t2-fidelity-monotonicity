@@ -96,10 +96,10 @@ its fidelity `t = 2` case as proved. Its remaining-open statements are narrowed
 accordingly. The bibliography describes the Lean component as a certificate of
 the full theorem.
 
-This repository is initially **private**, as requested. Its citation is therefore
-a draft reference until the repository is made accessible to readers. No change
-to public visibility is part of this version. Authorship metadata is left for the
-manuscript authors to settle.
+This repository is **public**. Cite the published
+[v2.1.0 release](https://github.com/aenictusGitHub/su2-t2-fidelity-monotonicity/releases/tag/v2.1.0)
+using [citation.bib](citation.bib). Authorship metadata is left for the manuscript
+authors to settle.
 
 Version 2.1.0 additionally certifies the spin-action group law and unitarity.
 See [basis conversion](BASIS_ORDER.md) and [the revised audit](audit/v2.1.0-audit.txt).

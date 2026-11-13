@@ -142,7 +142,7 @@
 +@misc{SU2T2FidelityProof,
 +  title = {Fidelity total anticoherence is nondecreasing under covariant noise at order two},
 +  year = {2026},
-+  howpublished = {GitHub repository},
-+  url = {https://github.com/aenictusGitHub/su2-t2-fidelity-monotonicity/tree/v2.1.0},
-+  note = {Version 2.1.0; self-contained proof and Lean certificate of the full theorem; private draft}
++  howpublished = {GitHub release},
++  url = {https://github.com/aenictusGitHub/su2-t2-fidelity-monotonicity/releases/tag/v2.1.0},
++  note = {Version 2.1.0; self-contained proof and Lean certificate of the full theorem}
 +}
