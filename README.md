@@ -1,4 +1,4 @@
-# Fidelity total anticoherence at order two
+# Order-two fidelity monotonicity under SU(2)-covariant channels: full proof and Lean certificate
 
 This repository proves the fidelity part of Conjecture 1 in
 *Total, quantum, and classical measures of anticoherence for mixed spin states*
