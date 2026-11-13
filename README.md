@@ -5,6 +5,11 @@ This repository proves the fidelity part of Conjecture 1 in
 (`resub_v0.tex`, 13 November 2026), for every proper order-two reduction,
 that is, every **N ≥ 3**.
 
+The companion manuscript is by Jérôme Denis, Tara Lacaille, John Martin, and
+Eduardo Serrano-Ensástiga (2026):
+[arXiv:2605.29436](https://arxiv.org/abs/2605.29436).
+Its BibTeX reference is included in [citation.bib](citation.bib).
+
 For every density operator on the spin-`N/2` sector and every completely positive,
 trace-preserving SU(2)-covariant channel on that same sector, the result is
 
