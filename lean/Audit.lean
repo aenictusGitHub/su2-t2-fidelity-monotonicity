@@ -1,4 +1,5 @@
 import FullTheorem
+import BasisOrder
 
 /-! Kernel axiom audit of the complete theorem and its physical bridges. -/
 #print axioms SU2T2.Dicke.embedding_isometry
@@ -18,3 +19,10 @@ import FullTheorem
 #print SU2T2.marginal2
 #print SU2T2.fidelityTotal2
 #print SU2T2.matrixFidelity2
+
+#print axioms SU2T2.Dicke.action_intertwines
+#print axioms SU2T2.Dicke.action_mul
+#print axioms SU2T2.Dicke.action_unitary
+#print axioms SU2T2.Dicke.unitaryAction
+#print axioms SU2T2.Spin.reverseVector_involutive
+#print axioms SU2T2.Spin.reverseMatrix_involutive

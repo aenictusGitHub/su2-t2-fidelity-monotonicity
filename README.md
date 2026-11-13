@@ -37,7 +37,7 @@ replaces the square-root integral by an elementary algebraic comparison.
 
 ## What Lean certifies
 
-**Version 2.0.0 proves the full quantum-channel theorem in Lean.** The principal
+**Version 2.1.0 proves the full quantum-channel theorem in Lean.** The principal
 theorem is `SU2T2.conjecture1_fidelity_t2` in [FullTheorem.lean](lean/FullTheorem.lean).
 Its hypotheses are precisely `N ≥ 3`, complete positivity, trace preservation,
 SU(2) covariance on density matrices, and a positive trace-one input.
@@ -100,3 +100,6 @@ This repository is initially **private**, as requested. Its citation is therefor
 a draft reference until the repository is made accessible to readers. No change
 to public visibility is part of this version. Authorship metadata is left for the
 manuscript authors to settle.
+
+Version 2.1.0 additionally certifies the spin-action group law and unitarity.
+See [basis conversion](BASIS_ORDER.md) and [the revised audit](audit/v2.1.0-audit.txt).

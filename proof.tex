@@ -418,6 +418,17 @@ the axiom audit, and checked-source hashes are supplied in
 \texttt{lean/README.md}, \texttt{lean/verification.log},
 \texttt{lean/axiom-audit.log}, and \texttt{lean/source-sha256.txt}.
 The original scalar certificate remains available as a subsidiary result.
+The file \texttt{SpinAction.lean} also proves invariance of the Dicke
+subspace under every tensor-power rotation, the spin-action group law,
+and unitarity. The resulting \texttt{unitaryAction} is a group homomorphism.
+Lean uses ascending magnetic order $m=k-N/2$; the manuscript's numerical
+arrays use descending order $m=N/2-q$. The conversion is $q=N-k$:
+$v^{\rm asc}_k=v^{\rm desc}_{N-k}$ and
+$\rho^{\rm asc}_{kl}=\rho^{\rm desc}_{N-k,N-l}$.
+For the reversal matrix $R$, channels convert as
+$\Phi^{\rm asc}(A)=R\Phi^{\rm desc}(RAR)R$.
+The vector and matrix reversals are proved involutive in
+\texttt{BasisOrder.lean}; see \texttt{BASIS\_ORDER.md} for details.
 
 \begin{remark}[Why the marginal constraint matters]
 The bound $A\preceq3\id_3/2$ comes from the symmetric extension to

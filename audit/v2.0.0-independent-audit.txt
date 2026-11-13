@@ -1,0 +1,185 @@
+INDEPENDENT AUDIT OF FIDELITY CONJECTURE 1 AT t=2
+
+Audited release: v2.0.0
+Audited commit: 1c020425fe52e7885bd8a94491e3156aa00c63cb
+Repository: aenictusGitHub/su2-t2-fidelity-monotonicity
+Target manuscript: Overleaf131126/First reply/resub_v0.tex
+
+VERDICT
+
+PASS for the fidelity portion of Conjecture 1 at proper order t=2.
+No substantive mathematical error, unproved premise, circular argument,
+inconsistent hypothesis, or semantic mismatch was found. The result is:
+
+  for every natural N >= 3, every density operator rho on spin N/2,
+  and every completely positive trace-preserving SU(2)-covariant map Phi
+  on that same sector,
+
+      A_2^{T,F}(Phi(rho)) >= A_2^{T,F}(rho),
+      A_2^{T,F}(rho) = ((Tr sqrt(rho_2))^2 - 1)/2.
+
+This proves only the fidelity portion of Conjecture 1 at t=2. It does
+not prove the trace-distance portion at t=2 or fidelity at higher orders.
+N=2 is outside the conjecture's stated proper-order range 2 <= t < N.
+
+AUDIT METHOD
+
+Three fresh-context reviews separately examined (1) the written mathematics,
+(2) the group/channel definitions and formal theorem, and (3) the physical
+marginal and spectral chain. They were instructed not to assume that the
+previous completion claims were correct and made no source changes.
+A separate verification used a fresh git archive of the exact committed
+release, without copying any project build artifacts. All pinned dependency
+checkouts were checked for their exact revisions and clean working trees.
+The public theorem and definitions were inspected directly; intermediate
+assumptions were traced through to their discharge in FullTheorem.lean.
+
+EXACT STATEMENT AND DEFINITION MATCH
+
+Manuscript lines 152-161 define the symmetric spin identification and actual
+qubit partial trace; lines 227-239 define covariant CPTP noise; lines 442-458
+fix squared Uhlmann-Jozsa fidelity and its normalized total candidate;
+lines 494-503 state the conjecture and its fidelity t=2 specialization.
+
+1. Domain and quantifiers
+   FullTheorem.lean:41 quantifies over every natural N >= 3, a complex-linear
+   endomorphism of the (N+1)-dimensional matrix algebra, and every positive
+   trace-one input. There is no purity, full-rank, random-rotation, special
+   channel-vertex, or additional extendibility assumption. Replacing N by
+   n+3 in the internal proof loses no permitted value, including N=3.
+
+2. Complete positivity and trace preservation
+   SU2Choi.lean:22-30 uses literal positivity under all finite ancillary
+   amplifications. Choi positivity is proved, not inserted as a premise.
+   Trace preservation on all operators is the ordinary linear-channel
+   definition and is equivalent to preservation on density matrices.
+
+3. SU(2) covariance
+   DickeSU2.lean:14 uses mathlib's actual specialUnitaryGroup (Fin 2) C.
+   Tensor power is the ordinary recursive Kronecker power. The action at
+   lines 25-26 is D^dagger U^(tensor N) D, with D the normalized Dicke
+   embedding. DensitySpan.lean proves that covariance on states extends
+   to all operators. FullTheorem uses the state-level condition, matching
+   the manuscript exactly.
+
+4. Physical marginal
+   PhysicalNBody.lean:48-51 takes the actual partial trace of D rho D^dagger
+   and compresses to the orthonormal Cartesian triplet basis. Support is
+   proved, so this compression discards no probability and introduces no
+   renormalization. Partial-trace associativity identifies the retained
+   subsystem as exactly the first two qubits. For symmetric states any
+   chosen pair is equivalent. Physical constraints are proved for every
+   N >= 3 from the actual symmetric three-qubit extension.
+
+5. Fidelity and spectra
+   Spectral.lean:13-14 uses the genuine positive matrix square root CFC.sqrt.
+   Lines 44-79 prove the real square-root trace and the required eigenvalue
+   power/product identities. Taking the real part does not change the trace
+   on a positive matrix. The normalization is exactly the manuscript's
+   ((Tr sqrt(rho_2))^2 - 1)/2. All traces are on the symmetric sector of
+   dimension 3, as the manuscript requires.
+
+WRITTEN PROOF AUDIT
+
+- proof.tex:77-110: The lowest-weight vector is cyclic under E. The
+  highest-weight uniqueness argument therefore gives scalar action on
+  ranks 0, 1 and 2 without an assumption about the higher ranks. Hermitian
+  descendants make f and g real, and trace pairing gives the same values
+  for the trace adjoint. Unitality follows from covariance and TP.
+- proof.tex:121-184: The Choi transpose convention, sign of X, +X/2 term,
+  both Casimir polynomials, two moments, variance factor 12/c, and bounds
+  g >= -2/3 and |f| < 1/3 when g < -1/2 all check. The later marginal law is
+  a forward reference, not a circular dependency: that law does not use
+  these multiplier bounds.
+- proof.tex:187-241: The Cartesian Pauli identity and determinant factor 8
+  are correct. The actual symmetric three-qubit reduction gives
+  I+2T-3rr^T >= 0, hence 0 <= A <= 3I/2 and Tr A=2. The global first and
+  second moments give the stated affine action with the correct constants.
+- proof.tex:246-337: Both cofactor cases, the volume bound, the broadened
+  g interval, and constants 1/9 and 1/324 check. The final determinant
+  polynomial identity has the correct coefficients and signs. The singular
+  A case is handled separately without division by zero.
+- proof.tex:339-392: Purity contraction follows from Hilbert-Schmidt
+  orthogonality. The three-eigenvalue comparison includes zero eigenvalues,
+  zero determinant, and pure states. The strict inequality in its
+  contradiction remains valid when d=0.
+
+Exact symbolic checks of the displayed Cartesian, cofactor, determinant and
+spectral identities agreed with the general derivations. Exact low-dimensional
+spin examples also agreed with both Choi identities; these checks are only
+supplementary, not the justification for arbitrary N.
+
+FORMAL PROOF CHAIN
+
+FullTheorem.lean:31-37 derives all required intermediate facts:
+  actual group covariance -> generator covariance;
+  generator covariance + CP/TP -> real f,g, identical trace-adjoint action,
+    unitality and the Choi variance bound;
+  actual marginal intertwiners -> full affine Cartesian action;
+  physical coherent output positivity -> linear multiplier bounds;
+  actual symmetric extension -> physical marginal constraints;
+  determinant increase + purity decrease -> actual square-root fidelity.
+
+No scalar multiplier, physical bound, attenuation formula, eigenvalue identity,
+or spectral identification survives as an assumption of the final theorem.
+The induced qutrit map is not assumed positive or CP on arbitrary qutrit states;
+only positivity of actual globally produced marginals is used.
+
+FORMAL DICTIONARY AND OPTIONAL IMPROVEMENTS
+
+These are informational observations, not correctness failures.
+
+- The spin action is defined by the explicit correct matrix formula
+  D^dagger U^(tensor N) D. Separate all-U invariant-range, action-multiplication
+  and action-unitarity lemmas are not present. Tensor-power group properties,
+  Dicke isometry, and the needed generator intertwiners are proved. The
+  correspondence to the usual restricted spin action is independently sound:
+  the Dicke columns span all vectors constant on Hamming-weight classes,
+  exactly the permutation-invariant subspace; U^(tensor N) commutes with
+  permutations and preserves that subspace. Thus the covariance hypothesis
+  excludes no physical SU(2)-covariant channel. Adding named group-action
+  lemmas would make this dictionary property explicit in Lean, but it is
+  not an omitted assumption in the monotonicity proof.
+- Lean uses increasing magnetic index m=k-N/2. The manuscript's numerical
+  HOAP arrays at line 1887 use decreasing m. This is a basis-order convention,
+  not a change of the coordinate-free theorem. Arrays exchanged with those
+  examples require the corresponding basis conversion; all formal objects
+  use one consistent convention.
+- The prose could explicitly write the trace-adjoint convention, the identity
+  <Q_ab>=N(N-1)(T_ab-delta_ab/3)/4, and the Cartesian expressions for the two
+  orthogonal ranks. Each is already mathematically justified and formally
+  proved through the existing bridges; these would be explanatory expansions.
+
+REPRODUCIBLE VERIFICATION
+
+Lean version: 4.24.0, arm64-apple-darwin23.6.0
+Lean commit: 797c613eb9b6d4ec95db23e3e00af9ac6657f24b
+Mathlib commit: f897ebcf72cd16f89ab4577d0c826cd14afaafc7
+
+- All 35 entries in source-sha256.txt matched: 32 Lean modules and 3
+  configuration/lock files.
+- All 9 dependency checkouts matched the pinned revisions and were clean.
+- A fresh archive build completed successfully: 3214 jobs, including all
+  32 project modules. Dependencies reused their pinned compiled caches;
+  no preexisting project proof objects were copied.
+- An additional `lake env lean --trust=0 -M 8192 Audit.lean` completed with
+  exit status 0. Lean's trust-zero mode requests type checking of imported
+  modules as well as the audit file.
+- The main theorem and all audited bridges report only:
+      propext, Classical.choice, Quot.sound
+  There is no sorryAx or additional mathematical axiom.
+- Source inspection found no sorry, admit, custom axiom, unsafe,
+  implemented_by, native_decide, or kernel-check bypass in project sources.
+- The committed proof PDF was rebuilt from the committed TeX in the separate
+  archive. Extracted text from the rebuilt and committed PDFs was identical.
+- Remaining build warnings concern unused simp arguments or tactics doing
+  nothing; they do not represent unfinished proofs.
+
+Evidence files in this directory:
+  fresh-build.log
+  trust-zero-audit.log
+  dependency-check.txt
+  archive-path.txt
+  pdf-rebuild.log
+
+No proof, certificate, manuscript or repository file was modified by this audit.

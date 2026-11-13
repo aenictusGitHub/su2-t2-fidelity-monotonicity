@@ -1,6 +1,6 @@
 # Lean certificate of the full fidelity theorem at t = 2
 
-Version 2.0.0 proves the full fidelity case of manuscript Conjecture 1 at proper
+Version 2.1.0 proves the full fidelity case of manuscript Conjecture 1 at proper
 order `t = 2`, for every natural `N ≥ 3`. The principal theorem is
 [`SU2T2.conjecture1_fidelity_t2`](FullTheorem.lean).
 
@@ -73,7 +73,7 @@ lake build
 lake env lean Audit.lean
 ```
 
-The cache retrieves compiled mathlib dependencies. `lake build` checks all 32
+The cache retrieves compiled mathlib dependencies. `lake build` checks all 34
 project modules from their source; it does not substitute a downloaded proof of
 this theorem. The recorded `verification.log` was produced after removing the
 project's local build artifacts. `axiom-audit.log` records a separate execution
@@ -88,3 +88,15 @@ propext, Classical.choice, Quot.sound
 There are no `sorry`, `admit`, custom `axiom`, or `native_decide` declarations in
 the project sources, and no `sorryAx` dependency. `source-sha256.txt` records the
 exact source and configuration files checked in this release.
+
+## Spin representation and basis conversion
+
+`SpinAction.lean` proves `action_intertwines`, `action_one`, `action_mul`,
+`action_unitary`, and packages the result as `unitaryAction`, a group
+homomorphism into the unitary group. Its polynomial argument establishes
+symmetric-subspace invariance for every fundamental matrix, before restricting
+to SU(2); it assumes no group-level intertwining identity.
+
+`BasisOrder.lean` supplies checked involutive vector and matrix reversals.
+See [the coordinate conversion guide](../BASIS_ORDER.md) for arrays, channels,
+and the relation between the manuscript's descending-m examples and Lean.

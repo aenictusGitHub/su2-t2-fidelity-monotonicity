@@ -1,0 +1,70 @@
+VERIFICATION ADDENDUM: v2.1.0
+
+This revision addresses both informational points in the independent v2.0.0
+audit, retained verbatim as v2.0.0-independent-audit.txt. This addendum records
+verification of the new material; it does not relabel that earlier audit as a
+new independent review of this revision.
+
+1. ALL-GROUP SPIN REPRESENTATION: ADDRESSED
+
+SpinAction.lean proves, for every N and every fundamental SU(2) element U,
+  tensorPower U N * embedding N = embedding N * action N U.
+No invariant-range or intertwining premise is assumed. The proof first shows
+that the row-generating polynomial of any 2x2 matrix's tensor power is
+  (U00+U01 X)^(N-weight(b)) (U10+U11 X)^weight(b).
+Coefficient equality implies constancy on row Hamming-weight classes. A
+projection lemma proved from the normalized Dicke embedding then establishes
+invariance of its range. Positivity of the binomial normalization is justified
+from weight(b)<=N, including N=0.
+
+The checked public results are:
+  Dicke.action_intertwines
+  Dicke.action_one
+  Dicke.action_mul
+  Dicke.action_unitary
+  Dicke.unitaryAction
+
+The last is a homomorphism from the actual SU(2) group into the unitary group
+on Fin(N+1). Thus group composition and unitarity are explicitly certified,
+in addition to the generator intertwiners used in the original theorem.
+
+2. MAGNETIC-BASIS ORDER: ADDRESSED
+
+BASIS_ORDER.md and the written proof specify the complete conversion between
+Lean's m=k-N/2 coordinates and the manuscript numerical arrays' m=N/2-q order:
+  q=N-k,
+  v_asc=R v_desc,
+  rho_asc=R rho_desc R,
+  Phi_asc(A)=R Phi_desc(R A R) R,
+where R is the reversal permutation, R=R^dagger=R^(-1). No additional phases
+are part of this reordering. Both indices of an operator must be reversed.
+The guide also states D_desc=D_asc R, identifying the same physical state.
+
+BasisOrder.lean implements reverseVector, reverseMatrix, reverseChannel and
+proves that vector and matrix reversal are involutions.
+
+3. THEOREM SCOPE
+
+The statement and proof of conjecture1_fidelity_t2 retain exactly the original
+physical hypotheses. FullTheorem now imports the certified group-action module.
+There is no new assumption on U, N, the input, channel, marginal or spectrum.
+The result remains the fidelity portion of Conjecture 1 at t=2, every N>=3.
+Neither trace-distance monotonicity nor higher-order fidelity is claimed.
+
+4. CHECKS
+
+Lean 4.24.0; mathlib f897ebcf72cd16f89ab4577d0c826cd14afaafc7.
+All 34 project modules rebuilt after removal of local project build artifacts:
+  lake build -- exit status 0, 3216 jobs completed.
+The expanded audit also passed:
+  lake env lean --trust=0 -M 8192 Audit.lean -- exit status 0.
+The full theorem and all new audited lemmas depend only on:
+  propext, Classical.choice, Quot.sound.
+There are no unfinished proofs, additional mathematical axioms, or kernel
+bypasses in the new sources. All 37 source/configuration hashes match.
+The revised six-page PDF compiled successfully; its changed final page was
+visually inspected for clipping, legibility and correct conversion formulas.
+
+Evidence: ../lean/verification.log, ../lean/axiom-audit.log,
+../lean/source-sha256.txt. The previous independent source audit remains
+applicable to the unchanged mathematical argument and physical theorem scope.

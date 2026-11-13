@@ -1,5 +1,6 @@
 import ManuscriptNotation
 import DensitySpan
+import SpinAction
 import PhysicalAffine
 
 /-!
