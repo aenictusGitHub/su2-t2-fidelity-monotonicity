@@ -1,0 +1,148 @@
+--- a/Overleaf131126/First reply/resub_v0.tex
++++ b/Overleaf131126/First reply/resub_v0.tex
+@@ -31,6 +31,7 @@
+     test {\ifstrequal{#1}{Yu2013QFIConvexRoofVariance}} or
+     test {\ifstrequal{#1}{2026Bringewatt}} or
+     test {\ifstrequal{#1}{Spin52PurityCertificates}} or
++    test {\ifstrequal{#1}{SU2T2FidelityProof}} or
+     test {\ifstrequal{#1}{HendersonVedral2001}} or
+     test {\ifstrequal{#1}{GiraudBraunBraun2008}} or
+     test {\ifstrequal{#1}{Luo2005ClassicalUncertainty}} or
+@@ -105,7 +106,7 @@
+ \begin{abstract}
+ 
+ \begin{revision}
+-Anticoherence is characterized by isotropic low-order spin moments. For pure states, it emerges from quantum superpositions and is relevant to direction-independent metrology and quantum reference-frame alignment. For mixed states such isotropy may also originate from classical statistical mixing. To formalize this difference, we introduce here an axiomatic framework for mixed-state $t$-anticoherence in the symmetric $N=2j$ qubit representation, with $1\le t<N$. We distinguish \emph{total} $t$-anticoherence, quantifying the reduced-state isotropy, from \emph{quantum} $t$-anticoherence, defined relative to a chosen total measure, which quantifies the isotropy coming from entanglement between the $t$ and $N-t$ qubits. This yields a \emph{classical} contribution as their difference. For concave total measures, this classical contribution admits an ensemble/measurement interpretation analogous to a Koashi–Winter relation. We construct total anticoherence measures based on distances to or overlaps with the maximally mixed state and quantum counterparts via convex-roof extensions of pure-state anticoherence measures. For the trace distance and fidelity candidates, their general covariant-noise monotonicity remains open. We give analytic mixed-state examples, study robustness under particle loss for different types of states and analyze purity–anticoherence trade-offs, including certified thresholds for low spins.
++Anticoherence is characterized by isotropic low-order spin moments. For pure states, it emerges from quantum superpositions and is relevant to direction-independent metrology and quantum reference-frame alignment. For mixed states such isotropy may also originate from classical statistical mixing. To formalize this difference, we introduce here an axiomatic framework for mixed-state $t$-anticoherence in the symmetric $N=2j$ qubit representation, with $1\le t<N$. We distinguish \emph{total} $t$-anticoherence, quantifying the reduced-state isotropy, from \emph{quantum} $t$-anticoherence, defined relative to a chosen total measure, which quantifies the isotropy coming from entanglement between the $t$ and $N-t$ qubits. This yields a \emph{classical} contribution as their difference. For concave total measures, this classical contribution admits an ensemble/measurement interpretation analogous to a Koashi–Winter relation. We construct total anticoherence measures based on distances to or overlaps with the maximally mixed state and quantum counterparts via convex-roof extensions of pure-state anticoherence measures. Fidelity total anticoherence is nondecreasing under all covariant channels at orders $t=1,2$. General covariant-noise monotonicity remains open for the trace-distance candidate at $2\le t<N$ and for the fidelity candidate at $3\le t<N$. We give analytic mixed-state examples, study robustness under particle loss for different types of states and analyze purity–anticoherence trade-offs, including certified thresholds for low spins.
+ \end{revision}
+ 
+ \end{abstract}
+@@ -430,7 +431,7 @@
+ \end{equation}
+ It therefore orders states in the same way as the purity total.
+ %, although a nonlinear transformation does not generally commute with taking a convex roof. 
+-For trace distance, $K_t^{\mathrm{tr}}=2t/(t+1)$. Its total functional obeys (T1)--(T3), while (T4) is proved below for $t=1$ and for random rotations. It remains open for general covariant channels at higher orders.
++For trace distance, $K_t^{\mathrm{tr}}=2t/(t+1)$. Its total functional obeys (T1)--(T3), while (T4) is proved below for $t=1$ and for random rotations. It remains open for general covariant channels at $2\le t<N$.
+ \end{revision}
+ 
+ 
+@@ -477,8 +478,7 @@
+ invariance of the fidelity,
+ $\rev{F(U\rho_tU^{\dagger},U\sigma U^{\dagger})=F(\rho_t,\sigma)}$, together with
+ $U\rho_0^{(t)} U^\dagger=\rho_0^{(t)}$. Thus $\A^{T,F}_t$ satisfies axioms~\eqref{ax:T1}--\eqref{ax:T3}.
+-Concerning axiom~\eqref{ax:T4}, some care is needed. Although a $\mathrm{SU}(2)$-covariant channel $\Phi$ on the full spin-$j$ space induces a linear transformation on the reduced state $\rho_t$, this induced reduced map is not, in general, a completely positive trace-preserving channel acting on the whole state space $\mathcal D(\mathcal H_{t/2})$. Therefore one cannot simply invoke monotonicity of the Uhlmann fidelity for an induced channel fixing $\rho_0^{(t)}$. Numerical evidence suggests that $\A^{T,F}_t$ is nevertheless
+-non-decreasing under $\mathrm{SU}(2)$-covariant noise, but we leave a proof of axiom~\eqref{ax:T4} for future work.
++Concerning axiom~\eqref{ax:T4}, some care is needed. Although a $\mathrm{SU}(2)$-covariant channel $\Phi$ on the full spin-$j$ space induces a linear transformation on the reduced state $\rho_t$, this induced reduced map is not, in general, a completely positive trace-preserving channel acting on the whole state space $\mathcal D(\mathcal H_{t/2})$. Therefore one cannot simply invoke monotonicity of the Uhlmann fidelity for an induced channel fixing $\rho_0^{(t)}$. \rev{Axiom~\eqref{ax:T4} is proved at $t=1$ below and at $t=2$ in Ref.~\cite{SU2T2FidelityProof}. For $3\le t<N$, numerical evidence supports nondecrease under all $\mathrm{SU}(2)$-covariant channels, but a proof remains open.}
+ 
+ \begin{revision}
+ The following cases of (T4) can be proved directly. At $t=1$, set $r=|\langle\mathbf J\rangle|/j$. Then
+@@ -494,7 +494,13 @@
+ \begin{conjecture}\label{conj:total_monotonicity}
+ For every $2\le t<N$, the trace-distance and fidelity total candidates are nondecreasing under all $\mathrm{SU}(2)$-covariant channels on the spin-$N/2$ sector.
+ \end{conjecture}
+-Numerical tests described in Appendix~\ref{app:numerics} support this conjecture; they do not establish it.
++For the fidelity candidate at $t=2$, Conjecture~\ref{conj:total_monotonicity} is proved for every $N\ge3$: for every state $\rho\in\mathcal D(\mathcal H_{N/2})$ and every $\mathrm{SU}(2)$-covariant channel $\Phi$ on that sector,
++\[
++ \A_2^{T,F}\!\bigl(\Phi(\rho)\bigr)
++ =\frac{\bigl(\Tr\sqrt{(\Phi(\rho))_2}\bigr)^2-1}{2}
++ \ge \A_2^{T,F}(\rho).
++\]
++A self-contained proof, together with a Lean certificate of its algebraic reduction, is provided in Ref.~\cite{SU2T2FidelityProof}. The trace-distance case at $2\le t<N$ and the fidelity case at $3\le t<N$ remain open. Numerical tests described in Appendix~\ref{app:numerics} support these remaining cases; they do not establish them.
+ \end{revision}
+ 
+ We conclude this section with a general result, which will prove useful later on the relation between the Uhlmann fidelity and entanglement. Consider a quantum state $|\psi\rangle$ defined on a composite Hilbert space $\mathcal{H}_{AB}$. Then, a measure of entanglement of the state $|\psi\rangle$ on the bipartition $A|B$ is given by the entanglement negativity~\cite{2002Vidal}
+@@ -619,7 +625,7 @@
+ \label{prop:Bures_quantum_Q1Q6}
+ The fidelity-based total candidate $\A^{T,F}_t$ and the quantum quantity $\A^{Q,F}_t$ defined in Eqs.~\eqref{BuresACTlin} and~\eqref{eq:BuresCompatibleQAC} satisfy the following properties:
+ The total candidate $\A^{T,F}_t$ satisfies axioms
+-\eqref{ax:T1}--\eqref{ax:T3}; \rev{it satisfies axiom~\eqref{ax:T4} at $t=1$ and under covariant random rotations at every proper order, while the general higher-order statement is Conjecture~\ref{conj:total_monotonicity}.} The quantum quantity $\A^{Q,F}_t$ satisfies axioms \eqref{ax:Q1}, \eqref{ax:Q3}--\eqref{ax:Q5}, coincides with $\A^{T,F}_t$ on pure states as required by \eqref{ax:Q2}, and obeys the ordering axiom~\eqref{ax:Q6} with respect to this total candidate. In particular,
++\eqref{ax:T1}--\eqref{ax:T3}; \rev{it satisfies axiom~\eqref{ax:T4} at $t=1,2$ (with $t<N$), using Ref.~\cite{SU2T2FidelityProof} for $t=2$, and under covariant random rotations at every proper order. The statement for all covariant channels at $3\le t<N$ remains open in Conjecture~\ref{conj:total_monotonicity}.} The quantum quantity $\A^{Q,F}_t$ satisfies axioms \eqref{ax:Q1}, \eqref{ax:Q3}--\eqref{ax:Q5}, coincides with $\A^{T,F}_t$ on pure states as required by \eqref{ax:Q2}, and obeys the ordering axiom~\eqref{ax:Q6} with respect to this total candidate. In particular,
+ \begin{equation}
+   \A_t^{Q,F}(\rho)\le \A_t^{T,F}(\rho)
+   \qquad\forall\,\rho\in\mathcal D(\mathcal H_j).
+@@ -634,10 +640,7 @@
+ $\mathcal A_t^{Q,F}\le \mathcal A_t^{T,F}$ relative to the total candidate
+ \eqref{BuresACTlin}, so the corresponding classical contribution
+ $\mathcal A_t^{C,F}=\mathcal A_t^{T,F}-\mathcal A_t^{Q,F}$ is nonnegative.
+-However, since axiom~\eqref{ax:T4} for $\mathcal A_t^{T,F}$ is supported here
+-\rev{at general higher orders only by numerical evidence, the fidelity-based pair} should be regarded as a
+-well-motivated candidate total--quantum pair until a proof of total monotonicity
+-under all $\mathrm{SU}(2)$-covariant channels is obtained.
++\rev{The fidelity-based pair satisfies the full total--quantum axioms at $t=1,2$ (with $t<N$), using Ref.~\cite{SU2T2FidelityProof} at $t=2$. For $3\le t<N$, total monotonicity under all $\mathrm{SU}(2)$-covariant channels remains supported only by numerical evidence, so the pair remains a candidate at these orders.}
+ 
+ \begin{revision}
+ \subsection{Classical AC measures: general constructions via convex-roof}
+@@ -839,7 +842,7 @@
+ \centering
+ \includegraphics[width=\linewidth]{Figures/Fig1_v3.pdf}
+ \color{red}
+-\caption{Total (gray dash-dotted), quantum (blue solid), and classical (orange dashed) anticoherence of the spin-$2$ family in Eq.~\eqref{Eq:j2_rank2_mixed_state}. Columns compare purity and fidelity; rows show $t=2$ and $t=3$. All curves are analytic. At $t=1$, both constructions give $(\A^T,\A^Q,\A^C)=(1,1,0)$ for every $\lambda$. The quantum values at $t=3$ saturate their distinct dimensional ceilings. The fidelity total remains a candidate for general covariant channels at higher orders.}
++\caption{Total (gray dash-dotted), quantum (blue solid), and classical (orange dashed) anticoherence of the spin-$2$ family in Eq.~\eqref{Eq:j2_rank2_mixed_state}. Columns compare purity and fidelity; rows show $t=2$ and $t=3$. All curves are analytic. At $t=1$, both constructions give $(\A^T,\A^Q,\A^C)=(1,1,0)$ for every $\lambda$. The quantum values at $t=3$ saturate their distinct dimensional ceilings. \rev{The fidelity total is a measure at $t=2$~\cite{SU2T2FidelityProof}; its monotonicity under all covariant channels remains open for $3\le t<N$.}}
+ \label{fig:ACMixed_example}
+ \end{figure}
+ \end{revision}
+@@ -951,7 +954,7 @@
+  p_{\rm succ}=\frac12+\frac14\left\|\rho_t-\frac{\mathbb 1_{t+1}}{t+1}\right\|_1
+  =\frac12+\frac{t}{2(t+1)}(1-\A_t^{T,\mathrm{tr}}).
+ \end{equation}
+-This is an operational interpretation for a marginal-state discrimination problem, not for arbitrary reference-frame alignment. The fidelity quantity is naturally tied to overlap with the isotropic marginal, and its pure-state restriction is normalized negativity. Both alternatives therefore have distinct uses, with the general higher-order total monotonicity caveat stated in Conjecture~\ref{conj:total_monotonicity}.
++This is an operational interpretation for a marginal-state discrimination problem, not for arbitrary reference-frame alignment. The fidelity quantity is naturally tied to overlap with the isotropic marginal, and its pure-state restriction is normalized negativity. Both alternatives therefore have distinct uses. The remaining total-monotonicity cases in Conjecture~\ref{conj:total_monotonicity} are $2\le t<N$ for trace distance and $3\le t<N$ for fidelity; fidelity at $t=2$ is proved in Ref.~\cite{SU2T2FidelityProof}.
+ 
+ There is also a direct relation between first-order quantum anticoherence and spin fluctuations. In units $\hbar=1$, $\sum_{a=x,y,z}J_a^2=j(j+1)\mathbb 1$ and Eq.~\eqref{eq:first_order_totals} imply
+ \begin{equation}\label{eq:variance_roof_AC}
+@@ -1290,7 +1293,7 @@
+ \label{Sec.Conc}
+ We have developed a systematic framework to quantify spin anticoherence beyond the pure-state setting. In its original formulation, spin $t$-anticoherence is a property of maximal isotropy: a spin state is $t$-anticoherent when all spin moments up to order $t$ are independent of direction, or equivalently when all multipole moments up to rank $t$ vanish. For mixed states, we recast this condition using the symmetric $N=2j$ qubit embedding, where it is equivalently expressed by maximal mixedness of the reduced symmetric $t$-qubit state $\rho_t$. This reformulation led to an axiomatic separation between \emph{total} $t$-anticoherence, which quantifies isotropy independently of its origin, and \emph{quantum} $t$-anticoherence, which isolates the genuinely quantum contribution as a resource monotone associated with a chosen total measure. Their difference defines a \emph{classical} contribution, capturing isotropy produced by statistical mixing.
+ 
+-On the constructive side, we introduced broad families of total measures based on normalized distances from $\rho_t$ to the MMS state, including a Hilbert--Schmidt distance-based measure and a fidelity-based total candidate, as well as simple purity-based and cumulative-multipole measures. The total monotonicity of the fidelity-based candidate under all $\mathrm{SU}(2)$-covariant channels remains supported by numerical evidence. We also showed how cumulative multipole functionals fit naturally into the same axiomatic picture, thereby clarifying the relation with earlier tensor-based descriptions of angular structure. For the quantum contribution, we constructed convex-roof extensions from pure-state functionals tied to bipartite entanglement across the $t\,|\,N{-}t$ split, obtaining explicit purity/linear-entropy-based quantum measures and a fidelity/convex-roof-negativity construction satisfying the quantum-side requirements and the ordering relative to the fidelity-based total candidate. For the constructions where the required ordering is established, the inequality $\mathcal A_t^Q\le \mathcal A_t^T$ ensures a well-defined and nonnegative classical part $\mathcal A_t^C=\mathcal A_t^T-\mathcal A_t^Q$.
++On the constructive side, we introduced broad families of total measures based on normalized distances from $\rho_t$ to the MMS state, including a Hilbert--Schmidt distance-based measure and a fidelity-based total candidate, as well as simple purity-based and cumulative-multipole measures. \rev{The fidelity total is nondecreasing under all $\mathrm{SU}(2)$-covariant channels at $t=1,2$, with the order-two proof given in Ref.~\cite{SU2T2FidelityProof}; the cases $3\le t<N$ remain supported only by numerical evidence.} We also showed how cumulative multipole functionals fit naturally into the same axiomatic picture, thereby clarifying the relation with earlier tensor-based descriptions of angular structure. For the quantum contribution, we constructed convex-roof extensions from pure-state functionals tied to bipartite entanglement across the $t\,|\,N{-}t$ split, obtaining explicit purity/linear-entropy-based quantum measures and a fidelity/convex-roof-negativity construction satisfying the quantum-side requirements and the ordering relative to the fidelity-based total candidate. For the constructions where the required ordering is established, the inequality $\mathcal A_t^Q\le \mathcal A_t^T$ ensures a well-defined and nonnegative classical part $\mathcal A_t^C=\mathcal A_t^T-\mathcal A_t^Q$.
+ 
+ Our examples illustrate that mixed-state anticoherence exhibits qualitatively new behavior absent in the pure-state regime. In particular, mixed states supported on $t$-AC subspaces can retain \emph{maximal quantum} $t$-anticoherence independently of the mixing weights, showing that perfect isotropy need not be of classical origin. Conversely, when the achievable anticoherence order is increased at fixed purity, the total isotropy typically becomes more classical: higher-order isotropy is accessible only at sufficiently low purity, and its quantum share generally decreases. We also showed contrasting robustness patterns under particle loss, with HOAP, GHZ, and $W$ states displaying markedly different decay profiles of the quantum contribution.
+ 
+@@ -1301,11 +1304,11 @@
+ \begin{revision}
+ We have formulated a distinction between total reduced-state isotropy and an entanglement-based quantum contribution to mixed-state anticoherence, on the proper-reduction domain $1\le t<N$. For concave totals and their convex roofs, the classical contribution is the maximal increase in isotropy due to mixing pure states. Equivalently, it is the maximal average reduction in marginal isotropy obtained by measuring a purifying environment and learning the outcome. This is a property of the state and the chosen functional, independent of the actual preparation.
+ 
+-The purity and Hilbert--Schmidt constructions satisfy the full total and quantum axioms. Trace distance and fidelity offer discrimination- and overlap-based motivations; their total monotonicity is proved at first order and for random rotations, while the general higher-order covariant-channel statement remains open. Cumulative multipoles provide another total description, but the spin-$2$ counterexample prevents a general LOCC-monotone extension with the same pure-state values. This obstruction has exceptions, including the spin-$3/2$, order-two case discussed above.
++The purity and Hilbert--Schmidt constructions satisfy the full total and quantum axioms. Trace distance and fidelity offer discrimination- and overlap-based motivations. Their total monotonicity is proved at first order and for random rotations at every proper order; for fidelity it is also proved at $t=2$~\cite{SU2T2FidelityProof}. The all-covariant-channel statement remains open for trace distance at $2\le t<N$ and fidelity at $3\le t<N$. Cumulative multipoles provide another total description, but the spin-$2$ counterexample prevents a general LOCC-monotone extension with the same pure-state values. This obstruction has exceptions, including the spin-$3/2$, order-two case discussed above.
+ 
+ Anticoherent subspaces connect maximal quantum anticoherence to existing results on mixed rotosensors. The first-order purity roof gives a bound on the sum of rotational QFIs, with an exact characterization at saturation. Our explicit spin-$2$ example also shows that different higher-order quantum measures can vary while the rotational QFI is unchanged. No single measure introduced here is therefore a universal metrological performance score.
+ 
+-Under particle loss, the GHZ and $W$ formulas are exact, whereas higher-rank HOAP results are numerical upper bounds. For the purity--order trade-off, we prove the relevant thresholds for spins $3/2$ and $2$, and certify the global optima of orders two, three, and four for spin $5/2$. For the rank-four spin-$5/2$ example, a closed radical formula gives the first-order purity roof, and a uniquely isolated polynomial root specifies the second-order roof exactly. Matching global positivity certificates and attaining ensembles prove both results. The higher-rank HOAP roofs remain open. These questions, and the general covariant-noise monotonicity of the trace-distance and fidelity totals, delimit the claims supported by the present framework.
++Under particle loss, the GHZ and $W$ formulas are exact, whereas higher-rank HOAP results are numerical upper bounds. For the purity--order trade-off, we prove the relevant thresholds for spins $3/2$ and $2$, and certify the global optima of orders two, three, and four for spin $5/2$. For the rank-four spin-$5/2$ example, a closed radical formula gives the first-order purity roof, and a uniquely isolated polynomial root specifies the second-order roof exactly. Matching global positivity certificates and attaining ensembles prove both results. The higher-rank HOAP roofs remain open. These questions, together with covariant-noise monotonicity of the trace-distance total at $2\le t<N$ and of the fidelity total at $3\le t<N$, delimit the claims supported by the present framework.
+ \end{revision}
+ 
+ \section*{Acknowledgements}
+@@ -1527,7 +1530,7 @@
+ \frac{(t+1)F(\rho_t,\rho_0^{(t)})-1}{t}.
+ \end{equation}
+ As discussed in Sec.~\ref{subsubsec:fidelity_based_total}, this quantity satisfies axioms \eqref{ax:T1}--\eqref{ax:T3}. Indeed, \eqref{ax:T1} follows from
+-$F(\rho_t,\rho_0^{(t)})=1$ iff $\rho_t=\rho_0^{(t)}$, while \eqref{ax:T2} follows from the fact that $F(\rho_t,\rho_0^{(t)})=1/(t+1)$ iff $\rho_t$ is pure, which in the symmetric sector forces the global state to be a pure spin-coherent state. Axiom \eqref{ax:T3} follows from unitary invariance of fidelity.
++$F(\rho_t,\rho_0^{(t)})=1$ iff $\rho_t=\rho_0^{(t)}$, while \eqref{ax:T2} follows from the fact that $F(\rho_t,\rho_0^{(t)})=1/(t+1)$ iff $\rho_t$ is pure, which in the symmetric sector forces the global state to be a pure spin-coherent state. Axiom \eqref{ax:T3} follows from unitary invariance of fidelity. \rev{Axiom~\eqref{ax:T4} at $t=1$ follows from Eq.~\eqref{eq:first_order_totals}, and its $t=2$ case for all $N\ge3$ is proved in Ref.~\cite{SU2T2FidelityProof}.}
+ 
+ We now prove the quantum axioms for
+ \begin{equation}
+@@ -1878,7 +1881,7 @@
+ \end{equation}
+ for $K=0,\ldots,N$ are CPTP covariant channels. They are the vertices of the fixed-sector covariant-channel simplex: covariance makes the Choi operator scalar on each irreducible sector of $U_j\otimes\overline U_j$~\cite{S0129055X22500210,Aschieri2024}\rev{~\cite{Rudnicki2026}}. This parameterization respects complete positivity, unlike independent sampling of multipole attenuation factors.
+ 
+-We have performed an exploratory test using $400$ random density operators for each $N=2,\ldots,6$, each vertex in Eq.~\eqref{eq:channel_vertices}, and every $1\le t<N$. A random rank was chosen uniformly from $1,\ldots,N+1$ and a density operator formed as $GG^\dagger/\Tr(GG^\dagger)$ from a complex Gaussian matrix of that size. No resolved decrease of the trace-distance or fidelity total was found. An identity-channel fidelity comparison near zero eigenvalues differed by approximately $10^{-8}$ from zero because of floating-point square roots; trace-norm differences were at roundoff level. These finite tests only support Conjecture~\ref{conj:total_monotonicity}. A proof for all inputs at the vertices would extend to their convex mixtures by concavity of the total functionals.
++We have performed an exploratory test using $400$ random density operators for each $N=2,\ldots,6$, each vertex in Eq.~\eqref{eq:channel_vertices}, and every $1\le t<N$. A random rank was chosen uniformly from $1,\ldots,N+1$ and a density operator formed as $GG^\dagger/\Tr(GG^\dagger)$ from a complex Gaussian matrix of that size. No resolved decrease of the trace-distance or fidelity total was found. An identity-channel fidelity comparison near zero eigenvalues differed by approximately $10^{-8}$ from zero because of floating-point square roots; trace-norm differences were at roundoff level. \rev{These finite tests support the remaining cases of Conjecture~\ref{conj:total_monotonicity}: trace distance at $2\le t<N$ and fidelity at $3\le t<N$. Fidelity at $t=2$ is established independently by the proof in Ref.~\cite{SU2T2FidelityProof}. For the remaining cases, a proof for all inputs at the vertices would extend to their convex mixtures by concavity of the total functionals.}
+ 
+ \subsection{States and feasible-ensemble optimization}
+ The HOAP input vectors used in both blocks of Fig.~\ref{fig:QACreduced}, in the ordered Dicke basis $m=N/2,N/2-1,\ldots,-N/2$, are proportional to
+--- a/Overleaf131126/refs_v3.bib
++++ b/Overleaf131126/refs_v3.bib
+@@ -864,3 +864,12 @@
+   year = {2004},
+   doi = {10.1103/PhysRevA.69.022309}
+ }
++
++
++@misc{SU2T2FidelityProof,
++  title = {Fidelity total anticoherence is nondecreasing under covariant noise at order two},
++  year = {2026},
++  howpublished = {GitHub repository},
++  url = {https://github.com/aenictusGitHub/su2-t2-fidelity-monotonicity/tree/v1.0.0},
++  note = {Version 1.0.0; self-contained proof and Lean certificate of the algebraic reduction; private draft}
++}

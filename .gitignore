@@ -1,0 +1,6 @@
+lean/.lake/
+*.aux
+*.out
+*.synctex.gz
+proof.log
+.DS_Store

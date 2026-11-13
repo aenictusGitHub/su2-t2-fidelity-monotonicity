@@ -1,0 +1,411 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=27mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,amsmath,amssymb,amsthm,mathtools,braket,dsfont}
+\usepackage[colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue]{hyperref}
+\usepackage{microtype}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\Sym}{Sym}
+\newcommand{\A}{\mathcal A}
+\newcommand{\id}{\mathds{1}}
+\newcommand{\E}{\mathbb E}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{remark}{Remark}
+\title{Fidelity total anticoherence is nondecreasing\\under covariant noise at order two}
+\author{}
+\date{13 November 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+We prove the fidelity part of Conjecture~1 of \emph{Total, quantum, and
+classical measures of anticoherence for mixed spin states}, at $t=2$, for
+every $N\ge3$. The notation and the squared Uhlmann--Jozsa fidelity
+normalization are those of \texttt{resub\_v0.tex}. The proof is based on
+\texttt{su2\_t2\_full\_direct\_proof.pdf}. It treats arbitrary covariant
+channels directly, derives their two relevant multipliers without $6j$
+symbols, and ends with an elementary three-eigenvalue argument.
+\end{abstract}
+
+\section{Statement and conventions}
+As in the manuscript, $\mathcal H_j$ is the spin-$j$ Hilbert space,
+$N=2j$, and $\rho_S$ is the state corresponding to
+$\rho\in\mathcal D(\mathcal H_j)$ under the identification
+$\mathcal H_j\simeq\Sym^N(\mathbb C^2)$. Put
+\[
+ \rho_t=\Tr_{N-t}(\rho_S),\qquad
+ \rho_0^{(t)}=\frac{\id_{t+1}}{t+1},\qquad
+ F(\rho_t,\rho_0^{(t)})=\frac{(\Tr\sqrt{\rho_t})^2}{t+1}.
+\]
+Thus the fidelity total candidate of the manuscript is
+\begin{equation}\label{eq:candidate}
+ \A_t^{T,F}(\rho)=\frac{(\Tr\sqrt{\rho_t})^2-1}{t}.
+\end{equation}
+All determinants and traces of two-qubit reductions below are taken on
+the three-dimensional symmetric subspace, including any zero eigenvalues.
+
+\begin{theorem}[Conjecture 1, fidelity candidate, $t=2$]\label{thm:main}
+Let $N\ge3$, $j=N/2$, and let $\Phi$ be a completely positive,
+trace-preserving map on $\mathcal B(\mathcal H_j)$ satisfying
+\[
+ \Phi(U\rho U^\dagger)=U\Phi(\rho)U^\dagger
+ \quad\text{for every spin-$j$ rotation $U$ and every state $\rho$.}
+\]
+Then, for every $\rho\in\mathcal D(\mathcal H_j)$,
+\begin{equation}\label{eq:main}
+ \boxed{\A_2^{T,F}\bigl(\Phi(\rho)\bigr)\ge\A_2^{T,F}(\rho).}
+\end{equation}
+\end{theorem}
+The condition $N\ge3$ is exactly the proper-order condition $2\le t<N$
+at $t=2$. No restriction to pure inputs or to random rotations is made.
+The theorem does not address the trace-distance candidate.
+
+\section{The two channel multipliers}
+Use the Hilbert--Schmidt orthonormal irreducible tensor operators
+$T_{LM}$ of the manuscript. The conjugation representation on
+$\mathcal B(\mathcal H_j)$ contains one copy of each rank $L=0,\ldots,N$.
+Schur's lemma and Hermiticity preservation therefore give real numbers
+$f_L$ such that
+\[
+ \Phi(T_{LM})=f_LT_{LM}.
+\]
+Covariance implies that $\Phi(\id)$ is a scalar multiple of $\id$;
+trace preservation fixes that scalar to one. In particular $f_0=1$.
+Write
+\[
+ f=f_1,\qquad g=f_2,\qquad S=N(N+2),\qquad D=S(S-3)>0.
+\]
+The symbol $S$ here is a scalar, distinct from the subscript in $\rho_S$.
+
+\begin{lemma}[Multiplier bounds]\label{lem:multipliers}
+Every channel in Theorem~\ref{thm:main} satisfies
+\begin{align}
+ -\frac35\le g\le1,\qquad 3|f|\le2+g,\label{eq:region}\\
+ 3Sf^2-6f-S\le2(S-3)g.\label{eq:curved}
+\end{align}
+Consequently $|f|\le1$ and $|g|\le1$; if $g<-1/2$, then $|f|<1/3$.
+\end{lemma}
+
+\begin{proof}
+We first derive formulas that include all covariant channels. Set
+$d=N+1$ and $c=j(j+1)=S/4$. Let $C_\Phi$ be the unnormalized Choi
+matrix, with convention
+\begin{equation}\label{eq:choi-trace}
+ \Tr[C_\Phi(B\otimes C^{\mathsf T})]=\Tr[B\Phi(C)].
+\end{equation}
+The unitary $V\ket{j,m}=(-1)^{j-m}\ket{j,-m}$ obeys
+$VJ_a^{\mathsf T}V^\dagger=-J_a$. Consequently
+$\widetilde C_\Phi=(\id\otimes V)C_\Phi(\id\otimes V^\dagger)$
+commutes with $U\otimes U$. In $\mathcal H_j\otimes\mathcal H_j$,
+weight $m\in\{-N,\ldots,N\}$ has multiplicity $N+1-|m|$.
+Subtracting consecutive nonnegative-weight multiplicities gives one
+copy of each spin $K=0,\ldots,N$. Thus the decomposition
+$\mathcal H_j\otimes\mathcal H_j=\bigoplus_{K=0}^N\mathcal H_K$
+is multiplicity free. Positivity of the Choi matrix and
+$\Tr C_\Phi=d$ imply
+\begin{equation}\label{eq:choi}
+ \widetilde C_\Phi=d\sum_{K=0}^N p_K\frac{P_K}{2K+1},\qquad
+ p_K\ge0,\qquad\sum_{K=0}^N p_K=1,
+\end{equation}
+where $P_K$ projects onto total spin $K$. We use $\E$ for this finite
+weighted average and put $\chi_K=K(K+1)$.
+
+For completeness the required Choi moments can be computed using only
+angular-momentum commutators. Define
+\[
+ X=\sum_{a=1}^3J_a\otimes J_a,\qquad
+ Q_{ab}=\frac{J_aJ_b+J_bJ_a}{2}-\frac c3\delta_{ab}\id.
+\]
+The total-spin Casimir gives $X P_K=(\chi_K/2-c)P_K$. The $J_a$
+span rank one, whereas the symmetric traceless $Q_{ab}$ span rank two.
+Moreover
+\begin{equation}\label{eq:quadrupole}
+ \sum_{a,b}Q_{ab}\otimes Q_{ab}
+ =X^2+\frac X2-\frac{c^2}3\id,
+ \qquad
+ \sum_{a,b}Q_{ab}^2=\frac{c(4c-3)}6\id.
+\end{equation}
+Here the first identity follows by expanding the symmetrized products
+and using $[J_a,J_b]=i\sum_k\epsilon_{abk}J_k$. For the second,
+expansion of $\sum_b[J_b,[J_b,J_a]]=2J_a$ gives
+$\sum_bJ_bJ_aJ_b=(c-1)J_a$. Thus, writing
+$B_{ab}=(J_aJ_b+J_bJ_a)/2$,
+\[
+ \sum_{a,b}B_{ab}^2
+ =\frac12\sum_{a,b}(J_aJ_bJ_aJ_b+J_aJ_bJ_bJ_a)
+ =\left(c^2-\frac c2\right)\id,
+\]
+which proves the second identity in \eqref{eq:quadrupole}.
+
+Time reversal changes the sign of $J_a^{\mathsf T}$ and fixes
+$Q_{ab}^{\mathsf T}$. Applying \eqref{eq:choi-trace} therefore yields
+\[
+ -dcf=\Tr(\widetilde C_\Phi X)=d\E(\chi/2-c),
+\]
+and
+\[
+ \frac{dc(4c-3)}6g
+ =d\E\left[(\chi/2-c)^2+\frac{\chi/2-c}{2}-\frac{c^2}3\right].
+\]
+Equivalently,
+\begin{equation}\label{eq:fg}
+ f=\E f_K,\quad g=\E g_K,\qquad
+ f_K=1-\frac{2\chi_K}{S},\quad
+ g_K=1+\frac{6\chi_K(\chi_K-S+1)}D.
+\end{equation}
+Since $0\le\chi_K\le N(N+1)<S-1$, we have $g_K\le1$.
+For $N=3$, the four values of $g_K$ are $1,1/5,-3/5,1/5$.
+For $N\ge4$, $S\ge24$, completing the square gives
+\[
+ g_K\ge1-\frac{3(S-1)^2}{2S(S-3)}\ge-\frac35,
+\]
+where the last inequality follows from
+\[
+ 16S(S-3)-15(S-1)^2=(S-24)(S+6)+129>0.
+\]
+The two linear bounds follow on averaging the identities
+\[
+ 2+g_K-3f_K=\frac{6\chi_K(\chi_K-2)}D\ge0,
+ \qquad
+ 2+g_K+3f_K=\frac{6[(\chi_K-S+2)^2+S-4]}D>0.
+\]
+The first inequality uses the discrete fact that $\chi_K=0$ or
+$\chi_K\ge2$. Finally, direct substitution into \eqref{eq:fg} gives
+\begin{equation}\label{eq:variance}
+ 2(S-3)g-(3Sf^2-6f-S)
+ =\frac{12}{S}\E[(\chi-\E\chi)^2]\ge0.
+\end{equation}
+If $g<-1/2$, \eqref{eq:curved} implies $Sf^2-2f-1<0$.
+Since $S\ge15$, this forces $-1/3<f<1/3$: otherwise
+$Sf^2-2f-1\ge15f^2-2f-1=(3f-1)(5f+1)\ge0$.
+\end{proof}
+
+\section{Physical two-qubit reductions}
+Write the symmetric two-qubit reduction in its Pauli form
+\begin{equation}\label{eq:pauli}
+ \rho_2=\frac14\left[\id\otimes\id+
+ \sum_{a=1}^3r_a(\sigma_a\otimes\id+\id\otimes\sigma_a)
+ +\sum_{a,b=1}^3T_{ab}\sigma_a\otimes\sigma_b\right].
+\end{equation}
+Here $\mathbf r\in\mathbb R^3$, $T=T^{\mathsf T}\in M_3(\mathbb R)$,
+and $\Tr T=1$, since $\sum_a\sigma_a\otimes\sigma_a=2\mathsf F-\id$
+and the swap $\mathsf F$ is the identity on the symmetric subspace.
+In the orthonormal Cartesian spin-one basis
+\[
+ \ket{x}=\frac{\ket{11}-\ket{00}}{\sqrt2},\quad
+ \ket{y}=\frac{i(\ket{11}+\ket{00})}{\sqrt2},\quad
+ \ket{z}=\frac{\ket{01}+\ket{10}}{\sqrt2},
+\]
+put $A=\id_3-T$ and let $[\mathbf r]_\times\mathbf v=
+\mathbf r\times\mathbf v$. Substitution in \eqref{eq:pauli} gives
+\begin{equation}\label{eq:cartesian}
+ 2\rho_2=A+i[\mathbf r]_\times,\qquad
+ 8\det\rho_2=\det A-\mathbf r^{\mathsf T}A\mathbf r.
+\end{equation}
+To check the determinant identity, diagonalize $A$ by a proper real
+rotation. The matrix then has diagonal $a,b,c$ and off-diagonal entries
+$-ir_3,ir_2,-ir_1$ and their conjugates; its determinant is
+$abc-ar_1^2-br_2^2-cr_3^2$.
+
+There is a useful bound specific to reductions of symmetric $N$-qubit
+states. With $J_a=\frac12\sum_{n=1}^N\sigma_a^{(n)}$, permutation
+symmetry gives
+\[
+ \langle J_a\rangle=\frac N2r_a,\qquad
+ \left\langle\frac{J_aJ_b+J_bJ_a}{2}\right\rangle
+ =\frac N4\delta_{ab}+\frac{N(N-1)}4T_{ab}.
+\]
+The nonnegative variance of every real linear combination of the $J_a$
+implies $\id+(N-1)T-N\mathbf r\mathbf r^{\mathsf T}\succeq0$.
+Testing \eqref{eq:cartesian} on real vectors gives $A\succeq0$.
+Consequently,
+\begin{equation}\label{eq:A-bounds}
+ 0\preceq A\preceq\frac{N}{N-1}\id_3\preceq\frac32\id_3,
+ \qquad\Tr A=2.
+\end{equation}
+Only the uniform bound $A\preceq3\id_3/2$ is needed below.
+
+Write $\rho'=\Phi(\rho)$. The partial trace intertwines rotations,
+so the rank-one and rank-two parts of the reduction acquire the same
+multipliers $f_1=f$ and $f_2=g$ as the global tensor components.
+Equivalently, the above first and second moments give directly
+\begin{equation}\label{eq:transform}
+ \mathbf r'=f\mathbf r,\quad T'=gT+\frac{1-g}{3}\id_3,
+ \quad A'=\alpha\id_3+gA,\qquad\alpha=\frac{2(1-g)}3.
+\end{equation}
+
+\section{Determinant monotonicity}
+We prove two elementary estimates for $A$ and $A'$.
+
+\begin{lemma}\label{lem:volume}
+Under \eqref{eq:A-bounds} and \eqref{eq:region}, $\det A'\ge\det A$.
+\end{lemma}
+\begin{proof}
+Write the eigenvalues of $A$ as $2/3+x_i$, where $\sum_i x_i=0$,
+and set $s_2=\sum_i x_i^2$, $p=x_1x_2x_3$. Expansion gives
+\begin{equation}\label{eq:volume-expansion}
+ \det A'-\det A=\frac{1-g^2}{3}s_2-(1-g^3)p.
+\end{equation}
+We claim $p\le5s_2/36$. This is immediate if $p\le0$.
+If $p>0$, exactly one $x_i$ is positive, so after relabeling
+$(x_1,x_2,x_3)=(q+r,-q,-r)$ with $q,r>0$.
+The upper eigenvalue bound gives $q+r\le5/6$, whereas
+$s_2=2(q^2+qr+r^2)\ge6qr$. Hence
+$p=(q+r)qr\le5s_2/36$, as claimed.
+Since $g\le1$, \eqref{eq:volume-expansion} now gives
+\[
+ \det A'-\det A\ge
+ \frac{(1-g)s_2}{36}(7+7g-5g^2)\ge0,
+\]
+because $7+7g-5g^2=1+(5g+3)(2-g)\ge1$ on $[-3/5,1]$.
+\end{proof}
+
+\begin{lemma}[Cofactor comparison]\label{lem:cofactor}
+If $b,c$ are any two eigenvalues of $A$, and
+$b'=\alpha+gb$, $c'=\alpha+gc$, then
+\begin{equation}\label{eq:cofactor}
+ b'c'\ge f^2bc.
+\end{equation}
+\end{lemma}
+\begin{proof}
+We have $0\le b,c\le3/2$ and $b+c\le2$. Also
+$\alpha+gx\ge0$ for $0\le x\le3/2$: for $g\ge0$ this is
+immediate, and for $g<0$ it follows from
+\begin{equation}\label{eq:positive}
+ \alpha+gx\ge\alpha+\frac32g=\frac{4+5g}{6}\ge\frac16.
+\end{equation}
+Write $s=b+c$, $p=bc$.
+
+If $g\ge-1/2$, then $2g+\alpha=2(1+2g)/3\ge0$.
+The identity
+\[
+ 4\bigl[b'c'-(g+\alpha)^2bc\bigr]
+ =\alpha\bigl[(2g+\alpha)(b-c)^2
+       +(2-s)\{2\alpha+(2g+\alpha)s\}\bigr]\ge0
+\]
+and $(g+\alpha)^2=(2+g)^2/9\ge f^2$ prove the claim.
+
+If $-3/5\le g<-1/2$, Lemma~\ref{lem:multipliers} gives $f^2<1/9$.
+Set $h=g^2-1/9>0$. The inequality
+$(3/2-b)(3/2-c)\ge0$ gives $p\ge3s/2-9/4$.
+Furthermore
+\[
+ \alpha g+\frac32h=\frac{(5g-1)(g+1)}6<0.
+\]
+It follows that
+\begin{align*}
+ b'c'-\frac{bc}{9}
+ &=\alpha^2+\alpha gs+hp\\
+ &\ge\alpha^2-\frac94h+
+       \left(\alpha g+\frac32h\right)s\\
+ &\ge\alpha^2+2\alpha g+\frac34h
+   =\frac{13+16g-5g^2}{36}\ge\frac{2}{45}>0.
+\end{align*}
+The last bound follows from
+$13+16g-5g^2=8/5+(g+3/5)(19-5g)$.
+This proves \eqref{eq:cofactor} in both cases.
+\end{proof}
+
+We can now show
+\begin{equation}\label{eq:det-monotone}
+ \det\rho'_2\ge\det\rho_2.
+\end{equation}
+In a common eigenbasis of $A,A'$, with respective eigenvalues $a,b,c$
+and $a',b',c'$, all six eigenvalues are nonnegative. Set
+$\Delta=8\det\rho_2$, $\Delta'=8\det\rho'_2$.
+Equation~\eqref{eq:cartesian} gives the polynomial identity
+\begin{align*}
+ abc(\Delta'-\Delta)
+ &=(a'b'c'-abc)\Delta\\
+ &\quad+aa'r_1^2(b'c'-f^2bc)
+       +bb'r_2^2(a'c'-f^2ac)
+       +cc'r_3^2(a'b'-f^2ab)\ge0.
+\end{align*}
+Every term is nonnegative by Lemmas~\ref{lem:volume} and
+\ref{lem:cofactor}, and $\Delta\ge0$ follows from $\rho_2\succeq0$.
+If $abc>0$, division proves \eqref{eq:det-monotone}.
+If $A$ is singular, then
+\eqref{eq:cartesian}, $A\succeq0$ and $\det\rho_2\ge0$ force
+$\det\rho_2=0$. The inequality is then immediate from
+$\rho'_2\succeq0$. This also covers all boundary states.
+
+\section{From determinant and purity to fidelity}
+Orthogonally decompose the reduction into its tensor ranks:
+\[
+ \rho_2=\frac{\id_3}{3}+X_1+X_2,\qquad
+ \rho'_2=\frac{\id_3}{3}+fX_1+gX_2.
+\]
+The Hermitian $X_1,X_2$ are traceless and Hilbert--Schmidt orthogonal.
+The bounds $|f|,|g|\le1$ therefore imply
+\begin{equation}\label{eq:purity}
+ \Tr[(\rho'_2)^2]=\frac13+f^2\Tr(X_1^2)+g^2\Tr(X_2^2)
+ \le\Tr(\rho_2^2).
+\end{equation}
+For a positive trace-one $3\times3$ matrix $B$, let
+$e_2(B)=(1-\Tr B^2)/2$ and $e_3(B)=\det B$.
+Equations~\eqref{eq:det-monotone} and \eqref{eq:purity} show that
+both $e_2$ and $e_3$ increase. The following elementary fact completes
+the argument without an integral representation of the square root.
+
+\begin{lemma}[Three-eigenvalue comparison]\label{lem:roots}
+If $B,C\succeq0$ are $3\times3$ matrices of trace one with
+$e_2(C)\ge e_2(B)$ and $\det C\ge\det B$, then
+$\Tr\sqrt C\ge\Tr\sqrt B$.
+\end{lemma}
+\begin{proof}
+Let $x,y,z\ge0$ be the square roots of the eigenvalues of $B$.
+Write $v=x+y+z$, $d=xyz=\sqrt{\det B}$ and $e=e_2(B)$.
+Since $x^2+y^2+z^2=1$, elementary expansion gives
+\begin{equation}\label{eq:root-identities}
+ v\ge1,\qquad (v^2-1)^2=4e+8dv,\qquad v(v^2-1)\ge18d.
+\end{equation}
+For the last inequality, use $v^2-1=2(xy+xz+yz)$ and
+\[
+ v(xy+xz+yz)-9xyz
+ =z(x-y)^2+x(y-z)^2+y(z-x)^2\ge0.
+\]
+Define $u,d',e'$ in the same way for $C$. If $u<v$, then
+$u\ge1$, $d'\ge d$ and $e'\ge e$ imply
+\[
+ (v^2-1)^2-(u^2-1)^2
+ =4(e-e')+8(dv-d'u)\le8d(v-u).
+\]
+Dividing by $v-u>0$ gives
+$(v+u)(v^2+u^2-2)\le8d$. But
+\[
+ (v+u)(v^2+u^2-2)
+ =v(v^2-1)+u(v^2-1)+(v+u)(u^2-1)
+ >v(v^2-1)\ge18d\ge8d,
+\]
+a contradiction. Here strictness follows from $u\ge1$ and $v>u$.
+\end{proof}
+
+Apply Lemma~\ref{lem:roots} to $B=\rho_2$, $C=\rho'_2$.
+Then $\Tr\sqrt{\rho'_2}\ge\Tr\sqrt{\rho_2}\ge0$; squaring and
+using \eqref{eq:candidate} proves \eqref{eq:main}.
+This proves precisely the fidelity part of Conjecture~1 at $t=2$.
+\qed
+
+\section{Formal verification and reproducibility}
+The accompanying Lean~4.24.0 files certify the complete scalar algebraic
+reduction of the argument, including every $N\ge3$, arbitrary probability
+mixtures, and singular inputs. The main theorem is
+\texttt{SU2T2.channel\_fidelity\_monotone\_from\_scalar\_reduction}.
+Its explicit hypotheses encode the multiplier formulas, the marginal
+constraints, and the spectral purity and determinant identities.
+The files contain no unfinished proofs or additional axioms. Their exact
+scope, dependency pins, checked-source hashes, and build instructions
+are recorded in \texttt{lean/README.md}.
+
+This is not an end-to-end Lean formalization of Theorem~\ref{thm:main}:
+the Choi/Casimir reduction, the physical marginal constraints, and the
+identification with spectral data are proved above but are not themselves
+formalized in Lean. This distinction is part of the certificate's scope.
+
+\begin{remark}[Why the marginal constraint matters]
+The bound $A\preceq3\id_3/2$ comes from the symmetric extension to
+$N\ge3$ qubits. An arbitrary spin-one density matrix need not obey it.
+The proof therefore does not assume that the induced reduced map is a
+positive or completely positive map on the whole spin-one state space.
+\end{remark}
+\end{document}

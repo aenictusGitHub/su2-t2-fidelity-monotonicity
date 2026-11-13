@@ -1,0 +1,40 @@
+Lean certificate verification
+Date: 2026-11-13 (Europe/Brussels)
+
+$ lean --version
+Lean (version 4.24.0, arm64-apple-darwin23.6.0, commit 797c613eb9b6d4ec95db23e3e00af9ac6657f24b, Release)
+Exit status: 0
+
+$ lake --version
+Lake version 5.0.0-src+797c613 (Lean version 4.24.0)
+Exit status: 0
+
+$ lake build
+ℹ [3089/3091] Replayed Multipliers
+info: Multipliers.lean:291:0: 'SU2T2.channel_region' depends on axioms: [propext, Classical.choice, Quot.sound]
+ℹ [3090/3091] Replayed Certificate
+info: Certificate.lean:112:0: 'SU2T2.determinant_monotone' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Certificate.lean:113:0: 'SU2T2.qutrit_fidelity_mono' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Certificate.lean:114:0: 'SU2T2.fidelity_monotone_from_scalar_reduction' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Certificate.lean:115:0: 'SU2T2.channel_fidelity_monotone_from_scalar_reduction' depends on axioms: [propext, Classical.choice, Quot.sound]
+Build completed successfully (3091 jobs).
+Exit status: 0
+
+$ lake env lean Multipliers.lean
+'SU2T2.channel_region' depends on axioms: [propext, Classical.choice, Quot.sound]
+Exit status: 0
+
+$ lake env lean Determinant.lean
+
+Exit status: 0
+
+$ lake env lean Qutrit.lean
+
+Exit status: 0
+
+$ lake env lean Certificate.lean
+'SU2T2.determinant_monotone' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SU2T2.qutrit_fidelity_mono' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SU2T2.fidelity_monotone_from_scalar_reduction' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SU2T2.channel_fidelity_monotone_from_scalar_reduction' depends on axioms: [propext, Classical.choice, Quot.sound]
+Exit status: 0
