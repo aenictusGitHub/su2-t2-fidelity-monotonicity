@@ -15,7 +15,7 @@ trace-preserving SU(2)-covariant channel on that same sector, the result is
 
 ```math
 \mathcal A^{T,F}_2(\Phi(\rho))\ge\mathcal A^{T,F}_2(\rho),\qquad
-\mathcal A^{T,F}_2(\rho)=\frac{(\operatorname{Tr}\sqrt{\rho_2})^2-1}{2}.
+\mathcal A^{T,F}_2(\rho)=\frac{(\mathrm{Tr}\sqrt{\rho_2})^2-1}{2}.
 ```
 
 The statement includes mixed inputs, singular reductions, every finite `N ≥ 3`,
