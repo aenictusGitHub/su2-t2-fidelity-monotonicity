@@ -1,9 +1,10 @@
 \documentclass[11pt]{article}
 \usepackage[T1]{fontenc}
 \usepackage[margin=24mm]{geometry}
-\usepackage{amsmath,amssymb,braket}
+\usepackage{amsmath,amssymb,braket,dsfont}
 \usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
 \DeclareMathOperator{\Tr}{Tr}
+\newcommand{\id}{\mathds{1}}
 \title{Exact purity certificates for spin $5/2$}
 \author{J\'er\^ome Denis, Tara Lacaille, John Martin,\\Eduardo Serrano-Ens\'astiga}
 \date{October 1, 2026}
@@ -14,9 +15,9 @@ This companion note contains the complete purity certificates formerly presented
 \end{abstract}
 
 \section{Problem, conventions, and attaining states}
-A spin-$5/2$ density operator is equivalent to a symmetric state of five qubits. A state is $t$-anticoherent when its $t$-qubit reduction is $\mathbb 1_{t+1}/(t+1)$, or equivalently when all multipoles of ranks one through $t$ vanish. For the background on anticoherence and symmetric reductions, see Refs.~\cite{Denis2026,BaguetteMartin2017}. Define
+A spin-$5/2$ density operator is equivalent to a symmetric state of five qubits. A state is $t$-anticoherent when its $t$-qubit reduction is $\id_{t+1}/(t+1)$, or equivalently when all multipoles of ranks one through $t$ vanish. For the background on anticoherence and symmetric reductions, see Refs.~\cite{Denis2026,BaguetteMartin2017}. Define
 \begin{equation}
- P_{\max}(5,t)=\max_{\rho\ge0,\,\Tr\rho=1,\,\rho_t=\mathbb 1_{t+1}/(t+1)}\Tr(\rho^2).
+ P_{\max}(5,t)=\max_{\rho\ge0,\,\Tr\rho=1,\,\rho_t=\id_{t+1}/(t+1)}\Tr(\rho^2).
 \end{equation}
 The feasible set is convex, but purity is a convex function being maximized. A feasible state establishes an attainable value; global optimality requires a universal upper bound as well. The certificates in Sec.~\ref{app:spin52_purity} supply those upper bounds.
 
@@ -61,7 +62,7 @@ We certify the global purity optima of orders two, three, and four. All certific
 \label{app:spin52_purity2}
 For a $2$-AC state, write
 \begin{equation}
- \rho=\tfrac16\mathbb 1_6+
+ \rho=\tfrac16\id_6+
  \sum_{L=3}^{5}\sum_{m=-L}^{L}x_{Lm}T_{Lm},\qquad
  P=\tfrac16+\sum_{L,m}|x_{Lm}|^2.
 \end{equation}
@@ -181,12 +182,12 @@ The weighted sum in Eq.~\eqref{eq:spin52_P3_certificate} cancels both cubic term
 
 \subsection{Exact fourth-order threshold}
 \label{app:spin52_purity4}
-Write a $4$-AC state as $\rho=\mathbb 1_6/6+X$, where
+Write a $4$-AC state as $\rho=\id_6/6+X$, where
 $X=\sum_{m=-5}^{5}x_mT_{5m}$ contains only rank-five multipoles.
 Hermiticity gives $x_{-m}=(-1)^mx_m^*$, and time reversal changes
 $X$ to $-X$. Positivity of $\rho$ and its time reverse therefore implies
 \begin{equation}
- B(X)=\tfrac1{36}\mathbb 1_6-X^2\ge0,\qquad
+ B(X)=\tfrac1{36}\id_6-X^2\ge0,\qquad
  S=\Tr X^2=P-\tfrac16.
 \end{equation}
 The following exact certificate proves $S\le1/8$. Physically, it uses
