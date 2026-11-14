@@ -13,10 +13,10 @@ Its BibTeX reference is included in [citation.bib](citation.bib).
 For every density operator on the spin-`N/2` sector and every completely positive,
 trace-preserving SU(2)-covariant channel on that same sector, the result is
 
-\[
+```math
 \mathcal A^{T,F}_2(\Phi(\rho))\ge\mathcal A^{T,F}_2(\rho),\qquad
 \mathcal A^{T,F}_2(\rho)=\frac{(\operatorname{Tr}\sqrt{\rho_2})^2-1}{2}.
-\]
+```
 
 The statement includes mixed inputs, singular reductions, every finite `N ≥ 3`,
 and all covariant channels. It does not settle the trace-distance candidate or
